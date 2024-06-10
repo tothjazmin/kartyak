@@ -1,0 +1,179 @@
+﻿body {
+    background-color: peachpuff;
+    color: #000;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.night-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.toggle-night-mode {
+    padding: 10px 20px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+}
+
+.toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: olive;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+    transition: opacity 0.5s ease;
+    width: 300px;
+    text-align: center;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.toast-icon {
+    margin-bottom: 10px;
+}
+
+.toast-message {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.toast-close {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.responsive-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #333;
+    height: 40px;
+    width: 100%;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+}
+
+    .menu li {
+        margin: 0 20px;
+    }
+
+        .menu li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+.kartyak {
+    display: flex;
+    justify-content: center;
+    margin: 40px;
+    flex-wrap: wrap;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 350px;
+    border: 1px solid #f1f1f1;
+    perspective: 1000px;
+    margin: 10px;
+    position: relative;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front {
+    background-color: darkkhaki;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.flip-card-back {
+    background-color: lightpink;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+.card-button {
+    font-size: 20px;
+    padding: 5px 10px;
+    background-color: seashell;
+    color: black; /* Fekete szín */
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: flex;
+        justify-content: flex-end; /* Jobb oldali igazítás */
+        width: auto; /* Automatikus szélesség */
+        margin-right: 20px; /* Margó a menühöz */
+    }
+
+    .menu-icon {
+        display: none;
+    }
+
+    .menu li {
+        margin: 0 10px; /* Kisebb margó */
+    }
+
+        .menu li a {
+            color: #fff;
+        }
+}
