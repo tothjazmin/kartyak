@@ -5,8 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
+    <script>
+           
+                const chatbotAnswers = {
+                    "Hogy hívnak?": "Tóth Jázmin Mária",
+                "Hány éves vagy?": "17",
+                "Melyik iskolába jársz?": "Mátészalka Gépészeti Informatika szak",
+                "Hova valósi vagy?": "Porcsalma"
+            };
+
+                function askQuestion() {
+                const question = document.getElementById('chatInput').value;
+                const chatOutput = document.getElementById('chatOutput');
+                if (question in chatbotAnswers) {
+                    chatOutput.innerText = chatbotAnswers[question];
+                } else {
+                    chatOutput.innerText = "Ez a kérdésre még nem tudok válaszolni.";
+                }
+            }
+
+                function addTask() {
+                const taskInput = document.getElementById('taskInput');
+                const taskList = document.getElementById('taskList');
+                const newTask = document.createElement('li');
+                newTask.innerText = taskInput.value;
+                taskList.appendChild(newTask);
+                taskInput.value = '';
+            }
+    
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const toggleNightModeButton = document.querySelector('.toggle-night-mode');
+    const closeButton = document.querySelector('.toast-close');
+
+    toggleNightModeButton.addEventListener('click', toggleNightMode);
+    closeButton.addEventListener('click', () => {
+    document.querySelector('.toast').style.display = 'none';
+    });
+
+    function toggleNightMode() {
+    document.body.classList.toggle('night-mode');
+    toggleNightModeButton.textContent = document.body.classList.contains('night-mode')
+    ? 'Éjszakai mód kikapcsolása'
+    : 'Éjszakai mód bekapcsolása';
+    }
+    });
+    </script>
        
-<style>﻿body {
+<style>﻿
+    body {
     background-color: peachpuff;
     color: #000;
     transition: background-color 0.3s, color 0.3s;
@@ -184,53 +231,9 @@
         .menu li a {
             color: #fff;
         }
-}</style>
-            <script>
-           
-                const chatbotAnswers = {
-                    "Hogy hívnak?": "Tóth Jázmin Mária",
-                "Hány éves vagy?": "17",
-                "Melyik iskolába jársz?": "Mátészalka Gépészeti Informatika szak",
-                "Hova valósi vagy?": "Porcsalma"
-            };
-
-                function askQuestion() {
-                const question = document.getElementById('chatInput').value;
-                const chatOutput = document.getElementById('chatOutput');
-                if (question in chatbotAnswers) {
-                    chatOutput.innerText = chatbotAnswers[question];
-                } else {
-                    chatOutput.innerText = "Ez a kérdésre még nem tudok válaszolni.";
-                }
-            }
-
-                function addTask() {
-                const taskInput = document.getElementById('taskInput');
-                const taskList = document.getElementById('taskList');
-                const newTask = document.createElement('li');
-                newTask.innerText = taskInput.value;
-                taskList.appendChild(newTask);
-                taskInput.value = '';
-            }
-    
-
-    document.addEventListener('DOMContentLoaded', () => {
-    const toggleNightModeButton = document.querySelector('.toggle-night-mode');
-    const closeButton = document.querySelector('.toast-close');
-
-    toggleNightModeButton.addEventListener('click', toggleNightMode);
-    closeButton.addEventListener('click', () => {
-    document.querySelector('.toast').style.display = 'none';
-    });
-
-    function toggleNightMode() {
-    document.body.classList.toggle('night-mode');
-    toggleNightModeButton.textContent = document.body.classList.contains('night-mode')
-    ? 'Éjszakai mód kikapcsolása'
-    : 'Éjszakai mód bekapcsolása';
-    }
-    });
-    </script>
+}
+</style>
+            
 </head>
 <body>
     <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
