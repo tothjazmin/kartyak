@@ -215,9 +215,9 @@
 @media (max-width: 768px) {
     .menu {
         display: flex;
-        justify-content: flex-end; /* Jobb oldali igazítás */
-        width: auto; /* Automatikus szélesség */
-        margin-right: 20px; /* Margó a menühöz */
+        justify-content: flex-end; 
+        width: auto; 
+        margin-right: 20px; 
     }
 
     .menu-icon {
@@ -242,7 +242,7 @@
         <div class="toast-content">
             <i class="toast-icon fas fa-info-circle"></i>
             <h1>Tóth Jázmin Mária vagyok</h1>
-            <p class="toast-message">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+            <p class="toast-message">Mátészalkán tanulok Informatika szakon a Gépészetiben</p>
             <p>11.-es vagyok</p>
         </div>
         <span class="toast-close">&times;</span>
@@ -264,12 +264,12 @@
                 <div class="flip-card-front">
                     <img src="virag.jpg" style="width:200px;height:150px;">
                     <h1>Tóth Jázmin Mária</h1>
-                    <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                    <h3>Mátészalkán tanulok Informatika szakon a Gépészetiben</h3>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
                 <div class="flip-card-back">
                     <h1>Tóth Jázmin Mária</h1>
-                    <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                    <p>Mátészalkán tanulok Informatika szakon a Gépészetiben</p>
                     <p>11.-es vagyok</p>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
@@ -280,12 +280,12 @@
                 <div class="flip-card-front">
                     <img src="virag.jpg" style="width:200px;height:150px;">
                     <h1>Tóth Jázmin Mária</h1>
-                    <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                    <h3>Mátészalkán tanulok Informatika szakon a Gépészetiben</h3>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
                 <div class="flip-card-back">
                     <h1>Tóth Jázmin Mária</h1>
-                    <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                    <p>Mátészalkán tanulok Informatika szakon a Gépészetiben</p>
                     <p>11.-es vagyok</p>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
@@ -296,12 +296,12 @@
                 <div class="flip-card-front">
                     <img src="virag.jpg" style="width:200px;height:150px;">
                     <h1>Tóth Jázmin Mária</h1>
-                    <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                    <h3>Mátészalkán tanulok Informatika szakon a Gépészetiben</h3>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
                 <div class="flip-card-back">
                     <h1>Tóth Jázmin Mária</h1>
-                    <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                    <p>Mátészalkán tanulok Informatika szakon a Gépészetiben</p>
                     <p>11.-es vagyok</p>
                     <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
                 </div>
