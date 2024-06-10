@@ -54,8 +54,8 @@
        
 <style>﻿
     body {
-    background-color: peachpuff;
-    color: #000;
+    background-color: lightpink;
+    color: lightpink;
     transition: background-color 0.3s, color 0.3s;
     position: relative;
     overflow: hidden;
