@@ -6,10 +6,12 @@
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
     <style>
-    /* Alap stílusok */
+   
+   
+/* Alap stílusok */
 body {
     font-family: Arial, sans-serif;
-    background-color: white; /* Alap háttérszín */
+    background-color: #ffc0cb; /* Rózsaszín háttérszín */
     color: #333;
     margin: 0;
     padding: 0;
@@ -28,10 +30,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 5px 10px; /* Kis méret a toast menünek */
     background-color: #333;
     color: white;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .toast-close {
