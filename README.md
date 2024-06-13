@@ -5,7 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
+    <script>
+    // Toast megjelenítése
+    function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show-toast');
+    }
+
+    // Toast bezárása
+    function closeToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('show-toast');
+    }
+</script>
+
     <style>
+     body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .toast.show-toast {
+            display: block;
+        }
+
+        .toast-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            color: #ccc;
+            font-size: 20px;
+        }
+
+        .toast-close:hover {
+            color: #fff;
+        }
         /* Alap stílusok */
         body {
             font-family: Arial, sans-serif;
@@ -163,9 +216,10 @@
 </head>
 <body>
     <div class="toast" id="toast">
-        <span class="toast-close" onclick="closeToast()">&times;</span>
-        <p>Tóth Jázmin Mária</p>
-        <p>Gépészes tanuló</p>
+    <span class="toast-close" onclick="closeToast()">&times;</span>
+<button onclick="showToast()">Toast megjelenítése</button>
+
+
     </div>
 
     <div class="responsive-menu">
@@ -189,14 +243,8 @@
     <div class="chatbot">
         <div class="chatbot-container">
             <div class="chatbot-header">
-                AI Chatbot
-            </div>
-            <div class="chat-messages">
-                <div class="message from-user">
-                    <div class="message-content">
-                        <p>Hello! Miben segíthetek?</p>
-                    </div>
-                </div>
+            
+           
                 <div class="message from-bot">
                     <div class="message-content">
                         <p>Üdvözlöm! Jelenleg ezekre a kérdésekre tudok válaszolni:</p>
@@ -218,11 +266,8 @@
     <div class="task-container">
         <h2>To Do lista</h2>
         <ul class="task-list" id="taskList">
-            <li>Feladat 1</li>
-            <li>Feladat 2</li>
-            <li>Feladat 3</li>
-        </ul>
-        <div>
+           
+        </ul>  <div>
             <input type="text" id="taskInput" placeholder="Új feladat...">
             <button onclick="addTask()">Hozzáadás</button>
         </div>
