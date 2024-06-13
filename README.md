@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-   
-   
-/* Alap stílusok */
+      
 body {
     font-family: Arial, sans-serif;
     background-color: #ffc0cb; /* Rózsaszín háttérszín */
@@ -17,59 +16,63 @@ body {
     padding: 0;
 }
 
-.toggle-night-mode {
-    margin: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #333;
-    cursor: pointer;
-    border-radius: 5px;
+a {
+    color: #333;
+    text-decoration: none;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
 
 .toast {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px; /* Kis méret a toast menünek */
-    background-color: #333;
-    color: white;
+    padding: 10px;
+    background-color: #ffb6c1; /* Világosabb rózsaszín */
+    color: #333;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
 }
 
 .toast-close {
     cursor: pointer;
 }
 
-/* Responsive menü */
 .responsive-menu {
     background-color: #333;
     padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
 }
 
 .menu {
-    display: flex;
-    flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-.menu-icon {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: white;
-    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .menu li {
-    margin: 10px;
+    margin: 0 10px;
 }
 
 .menu a {
     color: white;
     text-decoration: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.menu a:hover {
+    background-color: #555;
 }
 
 .dropdown-toggle::after {
@@ -78,32 +81,34 @@ body {
 
 .dropdown-menu {
     display: none;
-    flex-direction: column;
-    background-color: #444;
+    position: absolute;
+    background-color: #333;
     padding: 10px;
     border-radius: 5px;
 }
 
 .menu li:hover .dropdown-menu {
-    display: flex;
+    display: block;
 }
 
-/* Chatbot és ToDo lista */
+
 .chatbot-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
-    margin-top: 20px;
+    margin: 20px;
+    flex-wrap: wrap;
 }
 
 .chatbot {
     flex: 1;
-    background-color: white;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-right: 20px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .chat-output {
@@ -112,14 +117,17 @@ body {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .chat-input {
+    display: flex;
+    align-items: center;
     margin-top: 10px;
 }
 
 .chat-input input[type="text"] {
-    width: calc(100% - 70px);
+    flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -137,11 +145,13 @@ body {
 
 .task-container {
     flex: 1;
-    background-color: white;
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-left: 20px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .task-container h2 {
@@ -165,7 +175,6 @@ body {
     border-radius: 5px;
 }
 
-/* Éjszakai mód */
 .night-mode {
     background-color: #333;
     color: white;
@@ -182,50 +191,115 @@ body {
 }
 
 .toggle-night-mode:hover {
-    background-color: #444;
+    background-color: #555;
 }
 
-/* Chatbot stílusok */
-.chat-message {
-    margin-bottom: 10px;
+
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
     padding: 10px;
-    border-radius: 5px;
-    max-width: 70%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-message {
     background-color: #e0f7fa;
-    align-self: flex-end;
+    border-top-right-radius: 0;
 }
 
 .bot-message {
     background-color: #f5f5f5;
+    border-top-left-radius: 0;
 }
 
-/* Mobil nézet */
+.message-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.user-message .message {
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.bot-message .message {
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+    margin: 20px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+}
+
+.flip-card-front {
+    background-color: #fff;
+    color: #333;
+}
+
+.flip-card-back {
+    background-color: #f5f5f5;
+    color: #333;
+    transform: rotateY(180deg);
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: #555;
+}
+
+
 @media screen and (max-width: 768px) {
     .menu {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #333;
-        padding: 10px 0;
-        z-index: 1000;
         flex-direction: column;
-        align-items: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .menu-icon {
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-
-    .menu.active {
-        display: flex;
+        align-items: flex-start;
     }
 
     .menu li {
@@ -233,17 +307,13 @@ body {
     }
 
     .menu a {
-        color: white;
-        padding: 10px;
-        text-align: center;
         width: 100%;
-        display: block;
+        text-align: left;
     }
 
     .dropdown-menu {
-        position: relative;
-        width: 100%;
-        left: 0;
+        position: static;
+        width: auto;
         margin-top: 5px;
     }
 
@@ -256,15 +326,22 @@ body {
         width: 100%;
         margin-right: 0;
         margin-bottom: 20px;
+        max-width: 100%;
     }
 
     .task-container {
         width: 100%;
         margin-left: 0;
+        max-width: 100%;
+    }
+
+    .flip-card {
+        width: 100%;
+        max-width: 300px;
+        height: 400px;
+        margin: 10px;
     }
 }
-
-   
 </style>
     <script>
         const chatbotAnswers = {
@@ -277,20 +354,13 @@ body {
         function askQuestion() {
             const question = document.getElementById('chatInput').value;
             const chatOutput = document.getElementById('chatOutput');
-            const newQuestion = document.createElement('div');
-            const newAnswer = document.createElement('div');
-            newQuestion.className = 'chat-message user-message';
-            newAnswer.className = 'chat-message bot-message';
-            newQuestion.innerText = question;
-
-            chatOutput.appendChild(newQuestion);
             if (question in chatbotAnswers) {
-                newAnswer.innerText = chatbotAnswers[question];
+                chatOutput.innerHTML += `<div class="chat-message user-message">${question}</div>`;
+                chatOutput.innerHTML += `<div class="chat-message bot-message">${chatbotAnswers[question]}</div>`;
             } else {
-                newAnswer.innerText = "Ez a kérdésre még nem tudok válaszolni.";
+                chatOutput.innerHTML += `<div class="chat-message bot-message">Ez a kérdésre még nem tudok válaszolni.</div>`;
             }
-            chatOutput.appendChild(newAnswer);
-            chatOutput.scrollTop = chatOutput.scrollHeight;
+            // Clear input field
             document.getElementById('chatInput').value = '';
         }
 
@@ -335,13 +405,13 @@ body {
     </div>
 
     <nav class="responsive-menu">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">&#9776;</label>
         <ul class="menu">
             <li><a href="#home">Főoldal</a></li>
             <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Rólam</a></li>
             <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
-            <li>
-                <a href="#" class="dropdown-toggle">Linkek</a>
+            <li class="dropdown-toggle">Hasznos linkek
                 <ul class="dropdown-menu">
                     <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
                     <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
@@ -371,21 +441,58 @@ body {
                     </div>
                 </div>
             </div>
-            <!-- Ismétlődő kártyák -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                        <p>11.-es vagyok</p>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                        <p>11.-es vagyok</p>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="chatbot-container">
             <div class="chatbot">
-                <div id="chatOutput" class="chat-output">
-                    <!-- Chatbot válaszai jelennek meg itt -->
+                <h1>AI Chatbot</h1>
+                <div><p>Az AI Chatbot a következő kérdésekre tud válaszolni:</p>
+                <p>Hogy hívnak?</p>
+                <p>Hova valósi vagy?</p>
+                <p>Hány éves vagy?</p>
+                <p>Melyik iskolába jársz?</p>
+                </div>
+                <div class="chat-output" id="chatOutput">
+                    
                 </div>
                 <div class="chat-input">
                     <input type="text" id="chatInput" placeholder="Kérdés...">
                     <button onclick="askQuestion()">Kérdez</button>
                 </div>
             </div>
+
             <div class="task-container">
-                <h2>ToDo Lista</h2>
+                <h2>ToDo lista</h2>
                 <input type="text" id="taskInput" placeholder="Új feladat hozzáadása">
                 <button onclick="addTask()">Hozzáadás</button>
                 <ul id="taskList">
@@ -394,12 +501,5 @@ body {
             </div>
         </div>
     </div>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.querySelector('.menu');
-            menu.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
