@@ -5,22 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
-    <script>
-    // Toast megjelenítése
-    function showToast() {
-        const toast = document.getElementById('toast');
-        toast.classList.add('show-toast');
-    }
-
-    // Toast bezárása
-    function closeToast() {
-        const toast = document.getElementById('toast');
-        toast.classList.remove('show-toast');
-    }
-</script>
 
     <style>
-     body {
+        /* Alap stílusok */
+        body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             display: flex;
@@ -30,6 +18,7 @@
             margin: 0;
         }
 
+        /* Toast stílusok */
         .toast {
             position: fixed;
             top: 20px;
@@ -58,36 +47,6 @@
 
         .toast-close:hover {
             color: #fff;
-        }
-        /* Alap stílusok */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffc0cb; /* Rózsaszín háttérszín */
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Toast stílusok */
-        .toast {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px;
-            background-color: #ffb6c1; /* Világosabb rózsaszín */
-            color: #333;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-            max-width: 300px; /* Kisebb méret */
-        }
-
-        .toast-close {
-            cursor: pointer;
-            float: right;
-            font-weight: bold;
         }
 
         /* Chatbot stílusok */
@@ -148,6 +107,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden; /* Megakadályozza a tartalom kiugrását */
+            display: inline-block; /* Egymás mellett elhelyezkedés */
         }
 
         .flip-card-inner {
@@ -216,10 +176,8 @@
 </head>
 <body>
     <div class="toast" id="toast">
-    <span class="toast-close" onclick="closeToast()">&times;</span>
-<button onclick="showToast()">Toast megjelenítése</button>
-
-
+        <span class="toast-close" onclick="closeToast()">&times;</span>
+        <button onclick="showToast()">Toast megjelenítése</button>
     </div>
 
     <div class="responsive-menu">
@@ -243,8 +201,6 @@
     <div class="chatbot">
         <div class="chatbot-container">
             <div class="chatbot-header">
-            
-           
                 <div class="message from-bot">
                     <div class="message-content">
                         <p>Üdvözlöm! Jelenleg ezekre a kérdésekre tudok válaszolni:</p>
@@ -266,48 +222,50 @@
     <div class="task-container">
         <h2>To Do lista</h2>
         <ul class="task-list" id="taskList">
-           
-        </ul>  <div>
+            <!-- To Do lista tartalma dinamikusan generálódik JavaScript segítségével -->
+        </ul>
+        <div>
             <input type="text" id="taskInput" placeholder="Új feladat...">
             <button onclick="addTask()">Hozzáadás</button>
         </div>
     </div>
 
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card-content">
-                    <h3>Tóth Jázmin Mária</h3>
-                    <p>Gépészes tanuló</p>
-                    <a href="#" class="card-button">Tovább</a>
-                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+    <div class="flip-card-container">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <a href="#" class="card-button">Tovább</a>
+                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                    </div>
                 </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card-content">
-                    <h3>Tóth JázminMária</h3>
-                    <p>Gépészes tanuló</p>
-                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                <div class="flip-card-back">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <div class="card-content">
-                    <h3>Tóth Jázmin Mária</h3>
-                    <p>Gépészes tanuló</p>
-                    <a href="#" class="card-button">Tovább</a>
-                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <a href="#" class="card-button">Tov
+                    </div>
                 </div>
-            </div>
-            <div class="flip-card-back">
-                <div class="card-content">
-                    <h3>Tóth Jázmin Mária</h3>
-                    <p>Gépészes tanuló</p>
-                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                <div class="flip-card-back">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -397,4 +355,3 @@
 
 </body>
 </html>
-
