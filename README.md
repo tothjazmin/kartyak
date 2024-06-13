@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
-   <style>
-       body {
+  <style>
+      body {
     font-family: Arial, sans-serif;
     background-color: pink;
     color: #333;
@@ -86,6 +86,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 100px; /* Added margin to avoid overlap with menu */
 }
 
 .flip-card {
@@ -233,17 +234,40 @@ button {
     .kartyak {
         flex-direction: column;
         align-items: center;
+        margin-top: 200px; /* More margin for smaller screens */
     }
 
     .menu {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu.active {
+        display: flex;
     }
 
     .dropdown-menu {
         position: static;
         background-color: #444;
         width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .kartyak {
+        margin-top: 250px; /* More margin for smallest screens */
+    }
+
+    .chatbot-container {
+        margin-top: 20px; /* Ensure proper spacing */
     }
 }
 </style>
@@ -316,6 +340,7 @@ button {
     </div>
 
     <nav class="responsive-menu">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
         <ul class="menu">
             <li><a href="#home">Főoldal</a></li>
             <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Rólam</a></li>
@@ -334,24 +359,44 @@ button {
         </ul>
     </nav>
 
-    <div class="kartyak">
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <img src="virag.jpg" alt="Virág" class="card-img">
-                    <h1>Tóth Jázmin Mária</h1>
-                    <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-                    <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-                </div>
-                <div class="flip-card-back">
-                    <h1>Tóth Jázmin Mária</h1>
-                    <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                    <p>11.-es vagyok</p>
-                    <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+    <div class="content">
+        <div class="kartyak">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="virag.jpg" alt="Virág" class="card-img">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
+                    <div class="flip-card-back">
+                        <h1>Tóth Jázmin Mária</h1>
+                        <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                        <p>11.-es vagyok</p>
+                        <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                    </div>
                 </div>
             </div>
+            <!-- Ismétlődő kártyák -->
         </div>
-        <!-- Ismétlődő kártyák -->
+
+        <div class="chatbot-container">
+            <h1>AI Chatbot</h1>
+            <p>Milyen kérdésekre tudok válaszolni:</p>
+            <ul>
+                <li>Hogy hívnak?</li>
+                <li>Hány éves vagy?</li>
+                <li>Melyik iskolába jársz?</li>
+                <li>Hova valósi vagy?</li>
+            </ul>
+            <div class="chatbox">
+                <div id="chatOutput" class="chat-output">
+                    <!-- Chatbot válaszai jelennek meg itt -->
+                </div>
+                <input type="text" id="chatInput" placeholder="Kérdés...">
+                <button onclick="askQuestion()">Kérdez</button>
+            </div>
+        </div>
     </div>
 
     <div class="task-container">
@@ -360,24 +405,6 @@ button {
         <ul id="taskList">
             <!-- ToDo feladatok jelennek meg itt -->
         </ul>
-    </div>
-
-    <div class="chatbot-container">
-        <h1>AI Chatbot</h1>
-        <p>Milyen kérdésekre tudok válaszolni:</p>
-        <ul>
-            <li>Hogy hívnak?</li>
-            <li>Hány éves vagy?</li>
-            <li>Melyik iskolába jársz?</li>
-            <li>Hova valósi vagy?</li>
-        </ul>
-        <div class="chatbox">
-            <div id="chatOutput" class="chat-output">
-                <!-- Chatbot válaszai jelennek meg itt -->
-            </div>
-            <input type="text" id="chatInput" placeholder="Kérdés...">
-            <button onclick="askQuestion()">Kérdez</button>
-        </div>
     </div>
 </body>
 </html>
