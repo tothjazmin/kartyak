@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
-    <link href="kartya.css" rel="stylesheet">
-
     <style>
         /* Alap stílusok */
         body {
@@ -32,7 +30,7 @@
             display: none;
         }
 
-        .toast.show-toast {
+        .show-toast {
             display: block;
         }
 
@@ -107,7 +105,6 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden; /* Megakadályozza a tartalom kiugrását */
-            display: inline-block; /* Egymás mellett elhelyezkedés */
         }
 
         .flip-card-inner {
@@ -177,7 +174,7 @@
 <body>
     <div class="toast" id="toast">
         <span class="toast-close" onclick="closeToast()">&times;</span>
-        <button onclick="showToast()">Toast megjelenítése</button>
+        <p>Toast üzenet</p>
     </div>
 
     <div class="responsive-menu">
@@ -201,6 +198,9 @@
     <div class="chatbot">
         <div class="chatbot-container">
             <div class="chatbot-header">
+                <h2>Chatbot</h2>
+            </div>
+            <div class="chat-messages">
                 <div class="message from-bot">
                     <div class="message-content">
                         <p>Üdvözlöm! Jelenleg ezekre a kérdésekre tudok válaszolni:</p>
@@ -222,7 +222,7 @@
     <div class="task-container">
         <h2>To Do lista</h2>
         <ul class="task-list" id="taskList">
-            <!-- To Do lista tartalma dinamikusan generálódik JavaScript segítségével -->
+           
         </ul>
         <div>
             <input type="text" id="taskInput" placeholder="Új feladat...">
@@ -230,66 +230,41 @@
         </div>
     </div>
 
-    <div class="flip-card-container">
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <div class="card-content">
-                        <h3>Tóth Jázmin Mária</h3>
-                        <p>Gépészes tanuló</p>
-                        <a href="#" class="card-button">Tovább</a>
-                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
-                    </div>
-                </div>
-                <div class="flip-card-back">
-                    <div class="card-content">
-                        <h3>Tóth Jázmin Mária</h3>
-                        <p>Gépészes tanuló</p>
-                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
-                    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div class="card-content">
+                    <h3>Tóth Jázmin Mária</h3>
+                    <p>Gépészes tanuló</p>
+                    <a href="#" class="card-button">Tovább</a>
+                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
                 </div>
             </div>
-        </div>
-
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <div class="card-content">
-                        <h3>Tóth Jázmin Mária</h3>
-                        <p>Gépészes tanuló</p>
-                        <a href="#" class="card-button">Tov
-                    </div>
-                </div>
-                <div class="flip-card-back">
-                    <div class="card-content">
-                        <h3>Tóth Jázmin Mária</h3>
-                        <p>Gépészes tanuló</p>
-                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
-                    </div>
+            <div class="flip-card-back">
+                <div class="card-content">
+                    <h3>Tóth Jázmin Mária</h3>
+                    <p>Gépészes tanuló</p>
+                    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Toggle toast menu
-        const toggleToastMenuButton = document.querySelector('.toggle-toast-menu');
-        const toastMenu = document.querySelector('.toast');
+        // Toast megjelenítése
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show-toast');
+        }
 
-        toggleToastMenuButton.addEventListener('click', () => {
-            toastMenu.classList.toggle('show-toast');
-        });
+        // Toast bezárása
+        function closeToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('show-toast');
+        }
 
-        // Close toast
-        const closeToastButton = document.querySelector('.toast-close');
-
-        closeToastButton.addEventListener('click', () => {
-            toastMenu.classList.remove('show-toast');
-        });
-
-        // Chatbot functionality
-        const chatbotInput = document.querySelector('.chatbot-input input');
-        const chatbotMessages = document.querySelector('.chatbot-messages');
+        // Chatbot funkcionalitás
+        const chatbotInput = document.querySelector('.chatbot-input input         const chatbotMessages = document.querySelector('.chat-messages');
 
         function sendMessage() {
             const message = chatbotInput.value.trim();
@@ -301,7 +276,7 @@
                 chatbotInput.value = '';
                 setTimeout(() => {
                     respondToUser(message);
-                }, 500); // Simulate response delay
+                }, 500); // Válasz késleltetése
             }
         }
 
@@ -309,19 +284,13 @@
             let response;
             switch (message.toLowerCase()) {
                 case 'hány éves vagy?':
-                    response = '17';
-                    break;
-                case 'melyik iskolába jársz?':
-                    response = 'Mátészalka Gépészeti';
-                    break;
-                case 'milyen szakot tanulsz?':
-                    response = 'Informatika';
-                    break;
-                case 'hova valósi vagy?':
-                    response = 'Porcsalma';
+                    response = '17 éves vagyok.';
                     break;
                 case 'hogy hívnak?':
-                    response = 'Tóth Jázmin Mária';
+                    response = 'Tóth Jázmin Mária vagyok.';
+                    break;
+                case 'melyik iskolába jársz?':
+                    response = 'Mátészalkai Gépészeti Szakgimnáziumban tanulok.';
                     break;
                 default:
                     response = 'Sajnálom, erre a kérdésre még nem tudok válaszolni.';
@@ -333,7 +302,7 @@
             chatbotMessages.appendChild(messageElement);
         }
 
-        // To-Do list functionality
+        // To-Do lista funkcionalitás
         const taskInput = document.getElementById('taskInput');
         const taskList = document.getElementById('taskList');
 
@@ -349,9 +318,10 @@
 
         // Close toast function
         function closeToast() {
-            toastMenu.classList.remove('show-toast');
+            const toast = document.getElementById('toast');
+            toast.classList.remove('show-toast');
         }
     </script>
-
 </body>
 </html>
+
