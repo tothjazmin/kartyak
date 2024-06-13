@@ -182,7 +182,23 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="namjoon.jpg" alt="Kim Namjoon" class="card-img">
+                <div>
+                <h1>Tóth Jázmin Mária</h1>
+                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+            <div>
+                <h1>Tóth Jázmin Mária</h1>
+                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p>11.-es vagyok</p>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <div>
                 <h1>Tóth Jázmin Mária</h1>
                 <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
@@ -198,23 +214,7 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img src="jin.jpg" alt="Kim Seokjin" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-            <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-        </div>
-    </div>
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img src="yoongi.jpg" alt="Min Yoongi" class="card-img">
+            <div>
                 <h1>Tóth Jázmin Mária</h1>
                 <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
