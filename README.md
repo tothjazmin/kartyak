@@ -17,11 +17,6 @@
       align-items: center;
     }
 
-    .night-mode {
-      background-color: #333; /* sötét háttér */
-      color: #fff; /* fehér szöveg */
-    }
-
     .night-mode-toggle {
       position: fixed;
       top: 20px;
@@ -49,7 +44,7 @@
     }
 
     .toast {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -282,38 +277,9 @@
       background-color: #333; /* sötét rózsaszín */
     }
 
-    .night-mode .header,
-    .night-mode .responsive-menu,
-    .night-mode .flip-card-front,
-    .night-mode .flip-card-back,
-    .night-mode .todo-list,
-    .night-mode .chatbot-container {
-      background-color: #333;
-      color: #fff;
-      border-color: #fff;
-    }
-
-    .night-mode .menu a,
-    .night-mode .dropdown-menu li a {
-      color: #fff;
-    }
-
-    .night-mode .menu a:hover,
-    .night-mode .dropdown-menu li a:hover {
-      color: #ffb6c1;
-    }
-
-    .night-mode .flip-card-back button,
-    .night-mode .todo-form button,
-    .night-mode .chatbot-container button {
-      background-color: #ffb6c1;
-      color: #fff;
-    }
-
-    .night-mode .flip-card-back button:hover,
-    .night-mode .todo-form button:hover,
-    .night-mode .chatbot-container button:hover {
-      background-color: #333;
+    .night-mode {
+      background-color: #333; /* sötét háttér */
+      color: #fff; /* fehér szöveg */
     }
   </style>
 </head>
@@ -336,6 +302,7 @@
         <a href="#" class="dropdown-toggle">Szolgáltatások</a>
         <ul class="dropdown-menu">
           <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Főoldal</a></li>
+          <li><a href="#">Rólunk</a></li>
           <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
           <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
           <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
@@ -356,7 +323,7 @@
         </div>
         <div class="flip-card-back">
           <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" target="_blank">Google Sites Link</a></button>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" target="_blank">Google Sites Főoldal</a></button>
         </div>
       </div>
     </div>
@@ -368,7 +335,7 @@
         </div>
         <div class="flip-card-back">
           <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/ita-tjm10b/digikult" target="_blank">Google Sites Link</a></button>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" target="_blank">Google Sites Főoldal</a></button>
         </div>
       </div>
     </div>
@@ -380,37 +347,20 @@
         </div>
         <div class="flip-card-back">
           <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/ita-tjm10b/projekt" target="_blank">Google Sites Link</a></button>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" target="_blank">Google Sites Főoldal</a></button>
         </div>
       </div>
-    </div>
-  </div>
-
-  <div class="chatbot-container">
-    <h2>AI Chatbot - Üzenetek</h2>
-    <div id="chat-container">
-      <div class="chat-message user-message">
-        <p>Halló! Mi az aktuális idő?</p>
-      </div>
-      <div class="chat-message bot-message">
-        <p>Most 14:30 van.</p>
-      </div>
-      <!-- További chat üzenetek ide -->
-    </div>
-    <div class="chat-input">
-      <input type="text" id="user-input" placeholder="Írj üzenetet...">
-      <button id="send-button">Küldés</button>
     </div>
   </div>
 
   <div class="todo-list">
-    <h2>To Do Lista</h2>
-    <form class="todo-form" id="todo-form">
-      <input type="text" id="todo-input" class="todo-input" placeholder="Új feladat hozzáadása...">
-      <button type="submit" class="todo-button">Hozzáadás</button>
+    <h2>Teendők listája</h2>
+    <form class="todo-form">
+      <input type="text" class="todo-input" placeholder="Új feladat...">
+      <button type="submit">Hozzáadás</button>
     </form>
-    <div class="todo-container" id="todo-container">
-      <!-- To Do elemek ide -->
+    <div class="todo-items">
+      <!-- Itt jelennek majd meg a teendők dinamikusan -->
     </div>
   </div>
 
@@ -419,12 +369,9 @@
     const body = document.body;
     const toast = document.querySelector('.toast');
     const toastClose = document.querySelector('.toast .toast-close');
-    const chatContainer = document.getElementById('chat-container');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
-    const todoForm = document.getElementById('todo-form');
-    const todoInput = document.getElementById('todo-input');
-    const todoContainer = document.getElementById('todo-container');
+    const todoForm = document.querySelector('.todo-form');
+    const todoInput = document.querySelector('.todo-input');
+    const todoItems = document.querySelector('.todo-items');
 
     // Éjszakai mód kapcsoló kezelése
     nightModeToggle.addEventListener('click', () => {
@@ -436,29 +383,7 @@
       toast.classList.remove('show');
     });
 
-    // Chatbot küldése gomb kezelése (dummy)
-    sendButton.addEventListener('click', () => {
-      const userMessage = userInput.value.trim();
-      if (userMessage === '') return;
-      const userMessageElement = document.createElement('div');
-      userMessageElement.classList.add('chat-message', 'user-message');
-      userMessageElement.innerHTML = `<p>${userMessage}</p>`;
-      chatContainer.appendChild(userMessageElement);
-      userInput.value = '';
-
-      // Dummy válasz a chatbottól
-      const botMessageElement = document.createElement('div');
-      botMessageElement.classList.add('chat-message', 'bot-message');
-      botMessageElement.innerHTML = '<p>Kérem várjon, válasz készítés alatt...</p>';
-      chatContainer.appendChild(botMessageElement);
-
-      // Dummy válasz késleltetett megjelenítése
-      setTimeout(() => {
-        botMessageElement.innerHTML = '<p>Elnézést, jelenleg nem értem. Kérem próbálja újra később.</p>';
-      }, 1500);
-    });
-
-    // To Do lista hozzáadása
+    // Teendő hozzáadása
     todoForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const todoText = todoInput.value.trim();
@@ -466,11 +391,19 @@
       const todoItem = document.createElement('div');
       todoItem.classList.add('todo-item');
       todoItem.innerHTML = `
-        <input type="checkbox" id="todo${todoContainer.children.length + 1}">
-        <label for="todo${todoContainer.children.length + 1}">${todoText}</label>
+        <input type="checkbox">
+        <label>${todoText}</label>
+        <button class="delete-button">&times;</button>
       `;
-      todoContainer.appendChild(todoItem);
+      todoItems.appendChild(todoItem);
       todoInput.value = '';
+    });
+
+    // Teendő törlése
+    todoItems.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete-button')) {
+        e.target.parentElement.remove();
+      }
     });
   </script>
 </body>
