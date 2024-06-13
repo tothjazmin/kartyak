@@ -7,7 +7,7 @@
     <link href="kartya.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-      
+        /* Alap stílusok */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffc0cb; /* Rózsaszín háttérszín */
@@ -16,6 +16,7 @@ body {
     padding: 0;
 }
 
+/* Általános link stílus */
 a {
     color: #333;
     text-decoration: none;
@@ -25,7 +26,7 @@ a:hover {
     text-decoration: underline;
 }
 
-
+/* Toast stílusok */
 .toast {
     display: flex;
     justify-content: space-between;
@@ -36,12 +37,14 @@ a:hover {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
+    max-width: 300px; /* Kisebb méret */
 }
 
 .toast-close {
     cursor: pointer;
 }
 
+/* Responsive menü */
 .responsive-menu {
     background-color: #333;
     padding: 10px;
@@ -91,7 +94,7 @@ a:hover {
     display: block;
 }
 
-
+/* Chatbot és ToDo lista */
 .chatbot-container {
     display: flex;
     justify-content: space-between;
@@ -175,6 +178,7 @@ a:hover {
     border-radius: 5px;
 }
 
+/* Éjszakai mód */
 .night-mode {
     background-color: #333;
     color: white;
@@ -194,7 +198,7 @@ a:hover {
     background-color: #555;
 }
 
-
+/* Chatbot stílusok */
 .chat-messages {
     max-height: 300px;
     overflow-y: auto;
@@ -235,12 +239,16 @@ a:hover {
     word-wrap: break-word;
 }
 
+/* Kártyák stílusai */
 .flip-card {
     background-color: transparent;
     width: 300px;
     height: 400px;
     perspective: 1000px;
     margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Megakadályozza a tartalom kiugrását */
 }
 
 .flip-card-inner {
@@ -250,8 +258,6 @@ a:hover {
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .flip-card:hover .flip-card-inner {
@@ -263,7 +269,6 @@ a:hover {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .flip-card-front {
@@ -295,7 +300,7 @@ a:hover {
     background-color: #555;
 }
 
-
+/* Mobil nézet */
 @media screen and (max-width: 768px) {
     .menu {
         flex-direction: column;
@@ -342,6 +347,7 @@ a:hover {
         margin: 10px;
     }
 }
+
 </style>
     <script>
         const chatbotAnswers = {
