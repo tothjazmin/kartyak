@@ -99,8 +99,8 @@
 
         .flip-card {
             background-color: #fff;
-            width: 200px;
-            height: 300px;
+            width: 300px;
+            height: 400px;
             perspective: 1000px;
             margin: 10px;
             border-radius: 15px;
@@ -139,61 +139,124 @@
             transform: rotateY(180deg);
         }
 
-        /* Éjszakai mód */
-        body.night-mode {
+        .night-mode {
             background-color: #333;
             color: #fff;
         }
 
-        .toggle-night-mode {
+        .todo-list {
             background-color: #333;
-            color: #fff;
-            border-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
         }
 
-        .toast {
-            background-color: #333;
+        .todo-form {
+            display: flex;
+            margin-bottom: 10px;
         }
 
-        .flip-card {
-            background-color: #444;
+        .todo-input {
+            flex: 1;
+            padding: 8px;
+            font-size: 16px;
+            margin-right: 10px;
         }
 
-        .flip-card-front, .flip-card-back {
-            background-color: #444;
+        .todo-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
         }
 
-        .menu a {
-            color: #fff;
-        }
-
-        .dropdown-menu {
-            background-color: #555;
+        .todo-item input {
+            margin-right: 10px;
         }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleNightModeButton = document.querySelector('.toggle-night-mode');
             const closeButton = document.querySelector('.toast-close');
+            const chatbotButton = document.querySelector('.ai-chatbot-button');
+            const todoForm = document.querySelector('.todo-form');
+            const todoList = document.querySelector('.todo-list-items');
 
             toggleNightModeButton.addEventListener('click', toggleNightMode);
             closeButton.addEventListener('click', () => {
                 document.querySelector('.toast').style.display = 'none';
             });
 
+            chatbotButton.addEventListener('click', openChatbot);
+
             function toggleNightMode() {
                 document.body.classList.toggle('night-mode');
                 if (document.body.classList.contains('night-mode')) {
                     toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
-                    document.querySelector('.toast').style.backgroundColor = '#444'; // Adjust toast background color for night mode
+                    document.querySelector('.toast').style.backgroundColor = '#555'; // Toast háttérszíne éjszakai módban
+                    document.querySelector('.responsive-menu').style.backgroundColor = '#555'; // Menü háttérszíne éjszakai módban
+                    document.querySelectorAll('.flip-card').forEach(card => {
+                        card.style.backgroundColor = '#666'; // Kártyák háttérszíne éjszakai módban
+                    });
+                    document.querySelector('.todo-list').style.backgroundColor = '#444'; // To Do lista háttérszíne éjszakai módban
                 } else {
                     toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
-                    document.querySelector('.toast').style.backgroundColor = '#333'; // Adjust toast background color back to default
+                    document.querySelector('.toast').style.backgroundColor = '#444'; // Toast alapértelmezett háttérszíne
+                    document.querySelector('.responsive-menu').style.backgroundColor = '#444'; // Menü alapértelmezett háttérszíne
+                    document.querySelectorAll('.flip-card').forEach(card => {
+                        card.style.backgroundColor = '#666'; // Kártyák alapértelmezett háttérszíne
+                    });
+                    document.querySelector('.todo-list').style.backgroundColor = '#333'; // To Do lista alapértelmezett háttérszíne
                 }
             }
 
-            // Show toast on page load
-            document.querySelector('.toast').style.display = 'flex';
+            // AI Chatbot válaszok és kezelése
+            function openChatbot() {
+                const question = prompt('Kérdezz tőlem bármit a következő témákban:\n\n- Hány éves vagy?\n- Hogy hívnak?\n- Hova jársz iskolába?\n- Hanyadikos vagy?\n- Hol laksz?');
+
+                if (question) {
+                    let answer;
+                    switch (question.toLowerCase()) {
+                        case 'hány éves vagy?':
+                            answer = '17';
+                            break;
+                        case 'hogy hívnak?':
+                            answer = 'Tóth Jázmin Mária';
+                            break;
+                        case 'hova jársz iskolába?':
+                            answer = 'Mátészalka, Gépészeti';
+                            break;
+                        case 'hanyadikos vagy?':
+                            answer = '11.-es vagyok';
+                            break;
+                        case 'hol laksz?':
+                            answer = 'Porcsalmán';
+                            break;
+                        default:
+                            answer = 'Sajnálom, de erre a kérdésre nem tudok válaszolni.';
+                    }
+                    alert(answer);
+                }
+            }
+
+            // To Do lista hozzáadása
+            todoForm.addEventListener('submit', addTodo);
+
+            function addTodo(event) {
+                event.preventDefault();
+                const todoItem = document.querySelector('.todo-input').value.trim();
+
+                if (todoItem !== '') {
+                    const todoElement = document.createElement('div');
+                    todoElement.classList.add('todo-item');
+                    todoElement.innerHTML = `
+                        <input type="checkbox">
+                        <span>${todoItem}</span>
+                    `;
+                    todoList.appendChild(todoElement);
+                    document.querySelector('.todo-input').value = '';
+                }
+            }
         });
     </script>
 </head>
@@ -203,8 +266,8 @@
     <div class="toast-content">
         <i class="toast-icon fas fa-info-circle"></i>
         <h1>Tóth Jázmin Mária vagyok</h1>
-        <p class="toast-message">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-        <p>11.-es vagyok</p>
+        <p class="toast-message">Mátészalkán tanulok az Informatika szakon/p>
+                <p>11.-es vagyok</p>
     </div>
     <span class="toast-close">&times;</span>
 </div>
@@ -247,42 +310,52 @@
                 <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
                 <p>11.-es vagyok</p>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-</div>
-</div>
-</div>
-<div class="flip-card">
-<div class="flip-card-inner">
-<div class="flip-card-front">
-<img src="jin.jpg" alt="Kim Seokjin" class="card-img">
-<h1>Tóth Jázmin Mária</h1>
-<h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-<a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-</div>
-<div class="flip-card-back">
-<h1>Tóth Jázmin Mária</h1>
-<p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-<p>11.-es vagyok</p>
-<a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-</div>
-</div>
-</div>
-<div class="flip-card">
-<div class="flip-card-inner">
-<div class="flip-card-front">
-<img src="yoongi.jpg" alt="Min Yoongi" class="card-img">
-<h1>Tóth Jázmin Mária</h1>
-<h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-<a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-</div>
-<div class="flip-card-back">
-<h1>Tóth Jázmin Mária</h1>
-<p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-<p>11.-es vagyok</p>
-<a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="jin.jpg" alt="Kim Seokjin" class="card-img">
+                <h1>Tóth Jázmin Mária</h1>
+                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+            <div class="flip-card-back">
+                <h1>Tóth Jázmin Mária</h1>
+                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p>11.-es vagyok</p>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img src="yoongi.jpg" alt="Min Yoongi" class="card-img">
+                <h1>Tóth Jázmin Mária</h1>
+                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+            <div class="flip-card-back">
+                <h1>Tóth Jázmin Mária</h1>
+                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p>11.-es vagyok</p>
+                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div class="todo-list">
+    <h2>To Do lista</h2>
+    <form class="todo-form">
+        <input type="text" class="todo-input" placeholder="Új feladat...">
+        <button type="submit" class="todo-button">+</button>
+    </form>
+    <div class="todo-list-items"></div>
 </div>
+
 </body>
 </html>
+
