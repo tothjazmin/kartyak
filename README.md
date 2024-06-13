@@ -5,7 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
-    <style><style>
+    <script>// Toggle toast menu
+const toggleToastMenuButton = document.querySelector('.toggle-toast-menu');
+const toastMenu = document.querySelector('.toast');
+
+toggleToastMenuButton.addEventListener('click', () => {
+    toastMenu.classList.toggle('show-toast');
+});
+
+// Close toast
+const closeToastButton = document.querySelector('.toast-close');
+
+closeToastButton.addEventListener('click', () => {
+    toastMenu.classList.remove('show-toast');
+});
+
+// Chatbot functionality
+const chatbotInput = document.querySelector('.chatbot-input input');
+const chatbotMessages = document.querySelector('.chatbot-messages');
+
+function sendMessage(message, sender) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add('message', sender === 'user' ? 'from-user' : 'from-bot');
+    messageElement.innerHTML = `<div class="message-content"><p>${message}</p></div>`;
+    chatbotMessages.appendChild(messageElement);
+}
+
+chatbotInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        const message = chatbotInput.value.trim();
+        if (message !== '') {
+            sendMessage(message, 'user');
+            chatbotInput.value = '';
+            setTimeout(() => {
+                respondToUser(message);
+            }, 500); // Simulate response delay
+        }
+    }
+});
+
+function respondToUser(message) {
+    let response;
+    switch (message.toLowerCase()) {
+        case 'python programozás':
+            response = 'Python programozásban tudok segíteni.';
+            break;
+        case 'webfejlesztés':
+            response = 'Webfejlesztési témákban tudok tájékoztatást nyújtani.';
+            break;
+        case 'hálózati kérdések':
+            response = 'Hálózati kérdésekkel kapcsolatban is szívesen segítek.';
+            break;
+        default:
+            response = 'Sajnálom, erre a kérdésre még nem tudok válaszolni.';
+            break;
+    }
+    sendMessage(response, 'bot');
+}
+</script>
+    <style>
         /* Alap stílusok */
 body {
     font-family: Arial, sans-serif;
@@ -347,7 +405,7 @@ a:hover {
     }
 }
 
-</style></style>
+</style>
 </head>
 <body>
     <div class="responsive-menu">
@@ -368,52 +426,88 @@ a:hover {
         </ul>
     </div>
 
+    <div class="chatbot">
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                AI Chatbot
+            </div>
+            <div class="chatbot-messages">
+                <div class="message from-user">
+                    <div class="message-content">
+                        <p>Hello! Miben segíthetek?</p>
+                    </div>
+                </div>
+                <div class="message from-bot">
+                    <div class="message-content">
+                        <p>Üdvözlöm! Jelenleg ezekre a kérdésekre tudok válaszolni:</p>
+                        <ul>
+                            <li>Hány éves vagy?</li>
+                            <li>Hogy hívnak?</li>
+                            <li>Melyik iskolába jársz?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" placeholder="Írjon ide...">
+                <button class="send-button">Küldés</button>
+            </div>
+        </div>
+    </div>
+
     <div class="toast-menu">
         <button class="toggle-toast-menu">Toast menü megjelenítése</button>
         <div class="toast">
             <span class="toast-close">&times;</span>
-            <p>Ez egy toast üzenet.</p>
+            <p>Tóth Jázmin Mária</p>
+            <p>Gépészes tanuló</p>
         </div>
     </div>
-
-    <div class="cards-container">
-        <div class="flip-card">
+<div class="flip-card">
             <div class="flip-card-inner">
                 <div class="flip-card-front">
                     <div class="card-content">
-                        <h3>Kártya 1</h3>
-                        <p>Ez egy kártya leírása.</p>
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
                         <a href="#" class="card-button">Tovább</a>
+                          <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
                     </div>
                 </div>
                 <div class="flip-card-back">
                     <div class="card-content">
-                        <h3>Kártya 1 Hátlap</h3>
-                        <p>További információ a kártyáról.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="flip-card">
-            <div class="flip-card-inner">
-                <div class="flip-card-front">
-                    <div class="card-content">
-                        <h3>Kártya 2</h3>
-                        <p>Ez egy másik kártya leírása.</p>
-                        <a href="#" class="card-button">Tovább</a>
-                    </div>
-                </div>
-                <div class="flip-card-back">
-                    <div class="card-content">
-                        <h3>Kártya 2 Hátlap</h3>
-                        <p>További információ a másik kártyáról.</p>
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="kartya.js"></script>
+          
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <a href="#" class="card-button">Tovább</a>
+                          <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                    </div>
+                </div>
+                <div class="flip-card-back">
+                    <div class="card-content">
+                        <h3>Tóth Jázmin Mária</h3>
+                        <p>Gépészes tanuló</p>
+                        <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <script src="kartya.js"></script>
+
+   
 </body>
 </html>
