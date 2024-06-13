@@ -8,13 +8,13 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: pink;
-      color: #333;
+      background-color: #333;
+      color: #fff;
       margin: 0;
       padding: 0;
     }
     .header {
-      background-color: #333;
+      background-color: #444;
       color: white;
       padding: 10px 20px;
       text-align: center;
@@ -32,19 +32,19 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px;
-      background-color: #333;
+      background-color: #555;
       color: white;
       border-radius: 5px;
-      position: fixed;
-      top: 10px;
-      right: 10px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
       z-index: 1000;
     }
     .toast-close {
       cursor: pointer;
     }
     .responsive-menu {
-      background-color: #333;
+      background-color: #444;
       padding: 10px;
       display: flex;
       justify-content: space-between;
@@ -75,7 +75,7 @@
     .dropdown-menu {
       display: none;
       flex-direction: column;
-      background-color: #444;
+      background-color: #555;
       padding: 10px;
       border-radius: 5px;
       position: absolute;
@@ -87,7 +87,7 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 20px;
+      margin-top: 60px; /* Space for toast */
     }
     .flip-card {
       background-color: #fff;
@@ -126,27 +126,25 @@
     .flip-card-back {
       transform: rotateY(180deg);
     }
-    .night-mode {
-      background-color: #333;
-      color: #fff;
-    }
     .chatbot-container {
-      background-color: #f0f0f0;
+      background-color: #444;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
-      height: 300px;
+      height: 400px;
       overflow-y: auto;
-      border: 1px solid #ccc;
+      border: 1px solid #555;
     }
     .message-container {
+      display: flex;
+      flex-direction: column;
       margin-bottom: 10px;
     }
     .user-message, .bot-message {
       background-color: #00aced;
       color: #fff;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: 15px;
       max-width: 70%;
       margin: 10px;
     }
@@ -158,7 +156,7 @@
       align-self: flex-end;
     }
     .todo-list {
-      background-color: #333;
+      background-color: #444;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
@@ -206,21 +204,21 @@
       function toggleNightMode() {
         document.body.classList.toggle('night-mode');
         if (document.body.classList.contains('night-mode')) {
-          toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
-          document.querySelector('.toast').style.backgroundColor = '#555';
+          toggleNightModeButton.textContent = 'Nappali mód bekapcsolása';
+          document.querySelector('.toast').style.backgroundColor = '#777';
           document.querySelector('.responsive-menu').style.backgroundColor = '#555';
           document.querySelectorAll('.flip-card').forEach(card => {
             card.style.backgroundColor = '#666';
           });
-          document.querySelector('.todo-list').style.backgroundColor = '#444';
+          document.querySelector('.todo-list').style.backgroundColor = '#555';
         } else {
           toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
-          document.querySelector('.toast').style.backgroundColor = '#444';
+          document.querySelector('.toast').style.backgroundColor = '#555';
           document.querySelector('.responsive-menu').style.backgroundColor = '#444';
           document.querySelectorAll('.flip-card').forEach(card => {
-            card.style.backgroundColor = '#f9f9f9';
+            card.style.backgroundColor = '#fff';
           });
-          document.querySelector('.todo-list').style.backgroundColor = '#333';
+          document.querySelector('.todo-list').style.backgroundColor = '#444';
         }
       }
 
@@ -270,8 +268,8 @@
         const todoInput = document.querySelector('.todo-input');
         const todoText = todoInput.value.trim();
         if (todoText) {
-          const todo           const todoItem = document.createElement('div');
-          todoItem.classList.add('todo-item');
+          const todoItem = document.createElement('div');
+          todoItem.classList.add('          todo-item');
 
           const todoCheckbox = document.createElement('input');
           todoCheckbox.type = 'checkbox';
@@ -290,11 +288,6 @@
   </script>
 </head>
 <body>
-  <div class="toast">
-    Üdvözlünk a reszponzív weboldalon!
-    <span class="toast-close">&times;</span>
-  </div>
-
   <div class="header">
     <h1>Reszponzív Weboldal</h1>
     <div class="toggle-night-mode">Éjszakai mód bekapcsolása</div>
@@ -315,6 +308,11 @@
       </li>
       <li><a href="#">Kapcsolat</a></li>
     </ul>
+  </div>
+
+  <div class="toast">
+    Üdvözlünk a reszponzív weboldalon!
+    <span class="toast-close">&times;</span>
   </div>
 
   <div class="kartyak">
