@@ -8,13 +8,17 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #333;
-      color: #fff;
+      background-color: #f8d7da;
+      color: #333;
       margin: 0;
       padding: 0;
     }
+    .night-mode {
+      background-color: #333;
+      color: #fff;
+    }
     .header {
-      background-color: #444;
+      background-color: #ffb3ba;
       color: white;
       padding: 10px 20px;
       text-align: center;
@@ -32,19 +36,20 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px;
-      background-color: #555;
+      background-color: #ffb3ba;
       color: white;
       border-radius: 5px;
       position: absolute;
       top: 20px;
-      right: 20px;
+      left: 50%;
+      transform: translateX(-50%);
       z-index: 1000;
     }
     .toast-close {
       cursor: pointer;
     }
     .responsive-menu {
-      background-color: #444;
+      background-color: #ffb3ba;
       padding: 10px;
       display: flex;
       justify-content: space-between;
@@ -75,7 +80,7 @@
     .dropdown-menu {
       display: none;
       flex-direction: column;
-      background-color: #555;
+      background-color: #ffcccc;
       padding: 10px;
       border-radius: 5px;
       position: absolute;
@@ -127,13 +132,17 @@
       transform: rotateY(180deg);
     }
     .chatbot-container {
-      background-color: #444;
+      background-color: #ffb3ba;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
       height: 400px;
       overflow-y: auto;
       border: 1px solid #555;
+      position: relative;
+    }
+    .chatbot-container h2 {
+      margin-top: 0;
     }
     .message-container {
       display: flex;
@@ -156,7 +165,7 @@
       align-self: flex-end;
     }
     .todo-list {
-      background-color: #444;
+      background-color: #ffb3ba;
       padding: 20px;
       border-radius: 10px;
       margin-top: 20px;
@@ -211,14 +220,16 @@
             card.style.backgroundColor = '#666';
           });
           document.querySelector('.todo-list').style.backgroundColor = '#555';
+          document.querySelector('.chatbot-container').style.backgroundColor = '#555';
         } else {
           toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
-          document.querySelector('.toast').style.backgroundColor = '#555';
-          document.querySelector('.responsive-menu').style.backgroundColor = '#444';
+          document.querySelector('.toast').style.backgroundColor = '#ffb3ba';
+          document.querySelector('.responsive-menu').style.backgroundColor = '#ffb3ba';
           document.querySelectorAll('.flip-card').forEach(card => {
             card.style.backgroundColor = '#fff';
           });
-          document.querySelector('.todo-list').style.backgroundColor = '#444';
+          document.querySelector('.todo-list').style.backgroundColor = '#ffb3ba';
+          document.querySelector('.chatbot-container').style.backgroundColor = '#ffb3ba';
         }
       }
 
@@ -269,7 +280,7 @@
         const todoText = todoInput.value.trim();
         if (todoText) {
           const todoItem = document.createElement('div');
-          todoItem.classList.add('          todo-item');
+          todoItem.classList.add('todo-item');
 
           const todoCheckbox = document.createElement('input');
           todoCheckbox.type = 'checkbox';
@@ -322,11 +333,13 @@
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
         <div class="flip-card-back">
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
       </div>
     </div>
@@ -336,11 +349,13 @@
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
         <div class="flip-card-back">
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
       </div>
     </div>
@@ -350,11 +365,13 @@
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
         <div class="flip-card-back">
           <h2>Tóth Jázmin Mária</h2>
           <p>Gépészes tanuló</p>
           <p>11.-es</p>
+          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
         </div>
       </div>
     </div>
@@ -375,4 +392,3 @@
   </div>
 </body>
 </html>
-
