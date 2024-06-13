@@ -1,374 +1,373 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projekt a 1mükra számára</title>
-<style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f9f9f9;
-  transition: background-color 0.3s ease;
-}
-
-.night-mode {
-  background-color: #333;
-  color: #fff;
-}
-
-.night-mode .responsive-menu {
-  background-color: #555;
-}
-
-.night-mode .flip-card {
-  background-color: #666;
-}
-
-.night-mode .todo-list {
-  background-color: #444;
-}
-
-.responsive-menu {
-  background-color: #444;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-}
-
-.menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.menu li {
-  float: left;
-}
-
-.menu li a {
-  display: block;
-  padding: 14px 16px;
-  text-decoration: none;
-  color: #fff;
-}
-
-.menu li a:hover {
-  background-color: #555;
-}
-
-.dropdown-toggle {
-  position: relative;
-}
-
-.dropdown-toggle .dropdown-menu {
-  display: none;
-  position: absolute;
-  background-color: #444;
-  border-radius: 5px;
-  z-index: 1000;
-}
-
-.dropdown-toggle:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu li {
-  padding: 10px;
-}
-
-.dropdown-menu li a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.dropdown-menu li a:hover {
-  background-color: #555;
-}
-
-.toggle-night-mode {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  padding: 10px;
-  background-color: #444;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.kartyak {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 100px;
-}
-
-.flip-card {
-  background-color: #f9f9f9;
-  width: 300px;
-  height: 400px;
-  perspective: 1000px;
-  transition: background-color 0.3s ease;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.flip-card-back {
-  transform: rotateY(180deg);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.card-button {
-  display: block;
-  background-color: #333;
-  color: #fff;
-  text-decoration: none;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-}
-
-.chatbot-container {
-  max-width: 600px;
-  margin: auto;
-  margin-top: 50px;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s ease;
-}
-
-.message-container {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.user-message {
-  background-color: #00aced;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 70%;
-  align-self: flex-start;
-  margin-right: auto;
-  margin-left: 10px;
-}
-
-.bot-message {
-  background-color: #00aced;
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  max-width: 70%;
-  align-self: flex-end;
-  margin-left: auto;
-  margin-right: 10px;
-}
-
-.todo-list {
-  background-color: #333;
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px;
-  color: #fff;
-  width: 300px;
-  margin-left: auto;
-  margin-right: auto;
-  transition: background-color 0.3s ease;
-}
-
-.todo-form {
-  display: flex;
-  margin-bottom: 10px;
-}
-
-.todo-input {
-  flex: 1;
-  padding: 8px;
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-.todo-item {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-}
-
-.todo-item input {
-  margin-right: 10px;
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const toggleNightModeButton = document.querySelector('.toggle-night-mode');
-  const chatbotButton = document.querySelector('.ai-chatbot-button');
-  const todoForm = document.querySelector('.todo-form');
-  const todoList = document.querySelector('.todo-list');
-
-  toggleNightModeButton.addEventListener('click', toggleNightMode);
-
-  function toggleNightMode() {
-    document.body.classList.toggle('night-mode');
-    if (document.body.classList.contains('night-mode')) {
-      toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
-    } else {
-      toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reszponzív Weboldal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-JxxAgJNHMU2gupQrWQLQMXcEbvm0SbY5n97RCy1dP10Z6SR0q/LP3qh0VbAPiVRERkYi/2HoIjSYfyz6F4qfGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
     }
-  }
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    .toggle-night-mode {
+      margin: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #333;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .toast {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border-radius: 5px;
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+    }
+    .toast-close {
+      cursor: pointer;
+    }
+    .responsive-menu {
+      background-color: #333;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .menu {
+      display: flex;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .menu-icon {
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+      padding: 10px;
+    }
+    .menu li {
+      margin: 0 10px;
+    }
+    .menu a {
+      color: white;
+      text-decoration: none;
+    }
+    .dropdown-toggle::after {
+      content: ' ▼';
+    }
+    .dropdown-menu {
+      display: none;
+      flex-direction: column;
+      background-color: #444;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .menu li:hover .dropdown-menu {
+      display: flex;
+    }
+    .kartyak {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .flip-card {
+      background-color: #fff;
+      width: 300px;
+      height: 400px;
+      perspective: 1000px;
+      margin: 10px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+    .flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .night-mode {
+      background-color: #333;
+      color: #fff;
+    }
+    .chatbot-container {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+    }
+    .message-container {
+      margin-bottom: 10px;
+    }
+    .user-message, .bot-message {
+      background-color: #00aced;
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 70%;
+      margin: 10px;
+    }
+    .user-message {
+      background-color: #3b5998;
+      align-self: flex-start;
+    }
+    .bot-message {
+      align-self: flex-end;
+    }
+    .todo-list {
+      background-color: #333;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+      color: #fff;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .todo-form {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .todo-input {
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    .todo-item {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+    }
+    .todo-item input {
+      margin-right: 10px;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleNightModeButton = document.querySelector('.toggle-night-mode');
+      const closeButton = document.querySelector('.toast-close');
+      const chatbotButton = document.querySelector('.ai-chatbot-button');
+      const todoForm = document.querySelector('.todo-form');
+      const todoList = document.querySelector('.todo-list-items');
+      const chatbotContainer = document.querySelector('.chatbot-container');
 
-  chatbotButton.addEventListener('click', openChatbot);
+      toggleNightModeButton.addEventListener('click', toggleNightMode);
+      closeButton.addEventListener('click', () => {
+        document.querySelector('.toast').style.display = 'none';
+      });
+      chatbotButton.addEventListener('click', openChatbot);
+      todoForm.addEventListener('submit', addTodo);
 
-  function openChatbot() {
-    const question = prompt('Kérdezz tőlem bármit a következő témákban:\n\n- Hány éves vagy?\n- Hogy hívnak?\n- Hova jársz iskolába?\n- Hanyadikos vagy?\n- Hol laksz?');
-    if (question) {
-      let answer;
-      switch (question.toLowerCase()) {
-        case 'hány éves vagy?':
-          answer = '17';
-          break;
-        case 'hogy hívnak?':
-          answer = 'Tóth Jázmin Mária';
-          break;
-        case 'hova jársz iskolába?':
-          answer = 'Mátészalkán tanulok az Informatika szakon a Gépészetiben.';
-          break;
-        case 'hanyadikos vagy?':
-          answer = '11.-es vagyok.';
-          break;
-        case 'hol laksz?':
-          answer = 'Mátészalkán lakom.';
-          break;
-        default:
-          answer = 'Nem tudok válaszolni erre a kérdésre.';
+      function toggleNightMode() {
+        document.body.classList.toggle('night-mode');
+        if (document.body.classList.contains('night-mode')) {
+          toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
+          document.querySelector('.toast').style.backgroundColor = '#555';
+          document.querySelector('.responsive-menu').style.backgroundColor = '#555';
+          document.querySelectorAll('.flip-card').forEach(card => {
+            card.style.backgroundColor = '#666';
+          });
+          document.querySelector('.todo-list').style.backgroundColor = '#444';
+        } else {
+          toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
+          document.querySelector('.toast').style.backgroundColor = '#444';
+          document.querySelector('.responsive-menu').style.backgroundColor = '#444';
+          document.querySelectorAll('.flip-card').forEach(card => {
+            card.style.backgroundColor = '#f9f9f9';
+          });
+          document.querySelector('.todo-list').style.backgroundColor = '#333';
+        }
       }
-      const messageContainer = document.createElement('div');
-      messageContainer.classList.add('message-container');
-      const userMessage = document.createElement('div');
-      userMessage.classList.add('user-message');
-      userMessage.textContent = question;
-      const botMessage = document.createElement('div');
-      botMessage.classList.add('bot-message');
-      botMessage.textContent = answer;
-      messageContainer.appendChild(userMessage);
-      messageContainer.appendChild(botMessage);
-      chatbotContainer.appendChild(messageContainer);
-    }
-  }
 
-  todoForm.addEventListener('submit', addTodo);
+      function openChatbot() {
+        const question = prompt('Kérdezz tőlem bármit a következő témákban:\n\n- Hány éves vagy?\n- Hogy hívnak?\n- Hova jársz iskolába?\n- Hanyadikos vagy?\n- Hol laksz?');
+        if (question) {
+          let answer;
+          switch (question.toLowerCase()) {
+            case 'hány éves vagy?':
+              answer = '17';
+              break;
+            case 'hogy hívnak?':
+              answer = 'Tóth Jázmin Mária';
+              break;
+            case 'hova jársz iskolába?':
+              answer = 'Mátészalkára a Gépészetibe';
+              break;
+            case 'hanyadikos vagy?':
+              answer = '11.-es vagyok';
+              break;
+            case 'hol laksz?':
+              answer = 'Porcsalmán lakom';
+              break;
+            default:
+              answer = 'Nem tudok válaszolni erre a kérdésre.';
+          }
+          const messageContainer = document.createElement('div');
+          messageContainer.classList.add('message-container');
 
-  function addTodo(event) {
-    event.preventDefault();
-    const todoInput = document.querySelector('.todo-input');
-    const todoItem = todoInput.value.trim();
-    if (todoItem !== '') {
-      const todoElement = document.createElement('div');
-      todoElement.classList.add('todo-item');
-      todoElement.innerHTML = `
-        <input type="checkbox">
-        <span>${todoItem}</span>
-      `;
-      todoList.appendChild(todoElement);
-      todoInput.value = '';
-    }
-  }
-});
-</script>
+          const userMessage = document.createElement('div');
+          userMessage.classList.add('user-message');
+          userMessage.textContent = question;
+
+          const botMessage = document.createElement('div');
+          botMessage.classList.add('bot-message');
+          botMessage.textContent = answer;
+
+          messageContainer.appendChild(userMessage);
+          messageContainer.appendChild(botMessage);
+          chatbotContainer.appendChild(messageContainer
+          chatbotContainer.appendChild(messageContainer);
+          chatbotContainer.scrollTop = chatbotContainer.scrollHeight;
+        }
+      }
+
+      function addTodo(event) {
+        event.preventDefault();
+        const todoInput = document.querySelector('.todo-input');
+        const todoText = todoInput.value.trim();
+        if (todoText) {
+          const todoItem = document.createElement('div');
+          todoItem.classList.add('todo-item');
+
+          const todoCheckbox = document.createElement('input');
+          todoCheckbox.type = 'checkbox';
+
+          const todoLabel = document.createElement('label');
+          todoLabel.textContent = todoText;
+
+          todoItem.appendChild(todoCheckbox);
+          todoItem.appendChild(todoLabel);
+          todoList.appendChild(todoItem);
+
+          todoInput.value = '';
+        }
+      }
+    });
+  </script>
 </head>
 <body>
+  <div class="toast">
+    Üdvözlünk a reszponzív weboldalon!
+    <span class="toast-close">&times;</span>
+  </div>
+
+  <div class="header">
+    <h1>Reszponzív Weboldal</h1>
+    <div class="toggle-night-mode">Éjszakai mód bekapcsolása</div>
+  </div>
+
   <div class="responsive-menu">
+    <div class="menu-icon"><i class="fas fa-bars"></i></div>
     <ul class="menu">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a href="#">Főoldal</a></li>
+      <li><a href="#">Rólunk</a></li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle">Szolgáltatások</a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Webfejlesztés</a></li>
+          <li><a href="#">Grafikai tervezés</a></li>
+          <li><a href="#">SEO</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Kapcsolat</a></li>
     </ul>
-    <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
   </div>
 
   <div class="kartyak">
     <div class="flip-card">
-            <div class="flip-card-inner">
+      <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="your-image.jpg" alt="Image" class="card-img">
-          <h2>Card Front</h2>
+          <h2>Kártya 1</h2>
+          <p>Ez az első kártya.</p>
         </div>
         <div class="flip-card-back">
-          <h2>Card Back</h2>
-          <a href="#" class="card-button">Button</a>
+          <h2>Részletek</h2>
+          <p>Itt vannak a részletek az első kártyáról.</p>
         </div>
       </div>
     </div>
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <img src="your-image.jpg" alt="Image" class="card-img">
-          <h2>Card Front</h2>
+          <h2>Kártya 2</h2>
+          <p>Ez a második kártya.</p>
         </div>
         <div class="flip-card-back">
-          <h2>Card Back</h2>
-          <a href="#" class="card-button">Button</a>
+          <h2>Részletek</h2>
+          <p>Itt vannak a részletek a második kártyáról.</p>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h2>Kártya 3</h2>
+          <p>Ez a harmadik kártya.</p>
+        </div>
+        <div class="flip-card-back">
+          <h2>Részletek</h2>
+          <p>Itt vannak a részletek a harmadik kártyáról.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="chatbot-container">
-    <button class="ai-chatbot-button">Chatbot indítása</button>
-  </div>
-
   <div class="todo-list">
+    <h2>To-Do Lista</h2>
     <form class="todo-form">
       <input type="text" class="todo-input" placeholder="Új feladat hozzáadása">
       <button type="submit">Hozzáad</button>
     </form>
     <div class="todo-list-items"></div>
   </div>
+
+  <div class="chatbot-container">
+    <h2>AI Chatbot</h2>
+    <button class="ai-chatbot-button">Kérdezz tőlem!</button>
+  </div>
 </body>
 </html>
-
