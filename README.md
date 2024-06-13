@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reszponzív Weboldal</title>
+  
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -361,14 +361,20 @@
   </div>
 
   <script>
-    const nightModeToggle = document.querySelector('.night-mode-toggle');
-    const body = document.body;
-    const toast = document.querySelector('.toast');
-    const toastClose = document.querySelector('.toast .toast-close');
-    const chatContainer = document.getElementById('chat-container');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+    document.addEventListener('DOMContentLoaded', () => {
+            const toggleNightModeButton = document.querySelector('.toggle-night-mode');
+            const closeButton = document.querySelector('.toast-close');
 
+            toggleNightModeButton.addEventListener('click', toggleNightMode);
+            closeButton.addEventListener('click', () => {
+                document.querySelector('.toast').style.display = 'none';
+            });
+
+            function toggleNightMode() {
+                document.body.classList.toggle('night-mode');
+            }
+        });
+ 
     // Éjszakai mód kapcsoló kezelése
     nightModeToggle.addEventListener('click', () => {
       body.classList.toggle('night-mode');
