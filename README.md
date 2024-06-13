@@ -3,27 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weboldal</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="kartya.css">
-    <link rel="stylesheet" href="chatbot.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <style>
-        body {
+    <title>Kártyák</title>
+    <link href="kartya.css" rel="stylesheet">
+    <style>body {
     font-family: Arial, sans-serif;
-    background-color: pink;
-    color: #333;
-    margin: 0;
-    padding: 0;
 }
 
 .toggle-night-mode {
     margin: 10px;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #333;
-    cursor: pointer;
-    border-radius: 5px;
 }
 
 .toast {
@@ -33,7 +21,6 @@
     padding: 10px;
     background-color: #333;
     color: white;
-    border-radius: 5px;
 }
 
 .toast-close {
@@ -42,7 +29,6 @@
 
 .responsive-menu {
     background-color: #333;
-    padding: 10px;
 }
 
 .menu {
@@ -70,29 +56,129 @@
     text-decoration: none;
 }
 
-.dropdown-toggle::after {
-    content: ' ▼';
-}
-
-.dropdown-menu {
-    display: none;
-    flex-direction: column;
-    background-color: #444;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.menu li:hover .dropdown-menu {
-    display: flex;
-}
-
 .kartyak {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center
+    justify-content: center;
+}
+
+.flip-card {
+    background-color: transparent;
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 10px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+}
+
+.card-img {
+    width: 100%;
+    height: auto;
+}
+
+.card-button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.task-container, .chatbot-container {
+    padding: 20px;
+}
+
+#taskList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.night-mode {
+    background-color: #222;
+    color: white;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .kartyak {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    #menu-toggle:checked + .menu {
+        display: flex;
+    }
+}
 </style>
     <script>
-        
+        // JavaScript kód itt
+        const chatbotAnswers = {
+            "Hogy hívnak?": "Tóth Jázmin Mária",
+            "Hány éves vagy?": "17",
+            "Melyik iskolába jársz?": "Mátészalka Gépészeti Informatika szak",
+            "Hova valósi vagy?": "Porcsalma"
+        };
+
+        function askQuestion() {
+            const question = document.getElementById('chatInput').value;
+            const chatOutput = document.getElementById('chatOutput');
+            if (question in chatbotAnswers) {
+                chatOutput.innerText = chatbotAnswers[question];
+            } else {
+                chatOutput.innerText = "Ez a kérdésre még nem tudok válaszolni.";
+            }
+        }
+
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskList = document.getElementById('taskList');
+            const newTask = document.createElement('li');
+            newTask.innerText = taskInput.value;
+            taskList.appendChild(newTask);
+            taskInput.value = '';
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const toggleNightModeButton = document.querySelector('.toggle-night-mode');
             const closeButton = document.querySelector('.toast-close');
@@ -112,104 +198,65 @@
     </script>
 </head>
 <body>
+    <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
 
-<button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
-
-<div class="toast">
-    <div class="toast-content">
-        <i class="toast-icon fas fa-info-circle"></i>
-        <h1>Tóth Jázmin Mária vagyok</h1>
-        <p class="toast-message">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-        <p>11.-es vagyok</p>
+    <div class="toast">
+        <div class="toast-content">
+            <i class="toast-icon fas fa-info-circle"></i>
+            <h1>Tóth Jázmin Mária vagyok</h1>
+            <p class="toast-message">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+            <p>11.-es vagyok</p>
+        </div>
+        <span class="toast-close">&times;</span>
     </div>
-    <span class="toast-close">&times;</span>
-</div>
 
-<nav class="responsive-menu">
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
-    <ul class="menu">
-        <li><a href="#home">Főoldal</a></li>
-        <li><a href="#about">Rólam</a></li>
-        <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
-        <li class="dropdown-toggle">
-            <span>Bemutatkozás</span>
-            <ul class="dropdown-menu">
-                <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+    <nav class="responsive-menu">
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">&#9776;</label>
+        <ul class="menu">
+            <li><a href="#home">Főoldal</a></li>
+            <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Rólam</a></li>
+            <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
+        </ul>
+    </nav>
 
-<div class="kartyak">
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img src="namjoon.jpg" alt="Kim Namjoon" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-            <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+    <div class="kartyak">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="virag.jpg" alt="Virág" class="card-img">
+                    <h1>Tóth Jázmin Mária</h1>
+                    <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                    <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                </div>
+                <div class="flip-card-back">
+                    <h1>Tóth Jázmin Mária</h1>
+                    <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                    <p>11.-es vagyok</p>
+                    <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
+                </div>
             </div>
         </div>
+        <!-- Ismétlődő kártyák -->
     </div>
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img src="jin.jpg" alt="Kim Seokjin" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-            <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-        </div>
-    </div>
-    <div class="flip-card">
-        <div class="flip-card-inner">
-            <div class="flip-card-front">
-                <img src="yoongi.jpg" alt="Min Yoongi" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-            <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
-                <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="chatbot-container">
-    <div class="chatbox">
-        <div class="chat-header">
-            <h2>Mikre tudok válaszolni?</h2>
-        </div>
-        <div class="chat-output">
-            <div class="chat-message bot-message">
-                <p>Üdvözlöm! Miben segíthetek?</p>
-            </div>
-        </div>
-        <input type="text" id="chatInput" placeholder="Írjon üzenetet...">
-        <button id="sendButton">Küldés</button>
+    <div class="task-container">
+        <input type="text" id="taskInput" placeholder="Új feladat hozzáadása">
+        <button onclick="addTask()">Hozzáadás</button>
+        <ul id="taskList">
+            <!-- ToDo feladatok jelennek meg itt -->
+        </ul>
     </div>
-</div>
 
+    <div class="chatbot-container">
+        <h1>AI Chatbot</h1>
+        <div>
+            <input type="text" id="chatInput" placeholder="Kérdés...">
+            <button onclick="askQuestion()">Kérdez</button>
+        </div>
+        <div id="chatOutput">
+            <!-- Chatbot válaszai jelennek meg itt -->
+        </div>
+    </div>
 </body>
 </html>
