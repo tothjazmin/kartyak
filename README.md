@@ -17,6 +17,11 @@
       align-items: center;
     }
 
+    .night-mode {
+      background-color: #333; /* sötét háttér */
+      color: #fff; /* fehér szöveg */
+    }
+
     .night-mode-toggle {
       position: fixed;
       top: 20px;
@@ -45,7 +50,7 @@
 
     .toast {
       position: fixed;
-      top: 20px;
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
@@ -196,6 +201,57 @@
       background-color: #333; /* sötét rózsaszín */
     }
 
+    .todo-list {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .todo-list h2 {
+      margin-top: 0;
+    }
+
+    .todo-form {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .todo-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .todo-form button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .todo-form button:hover {
+      background-color: #333; /* sötét rózsaszín */
+    }
+
+    .todo-item {
+      margin-bottom: 10px;
+    }
+
+    .todo-item label {
+      margin-left: 10px;
+    }
+
     .chatbot-container {
       width: 100%;
       max-width: 600px;
@@ -226,45 +282,38 @@
       background-color: #333; /* sötét rózsaszín */
     }
 
-    /* Éjszakai mód stílusai */
-    .night-mode {
-      background-color: #333; /* sötét háttér */
-      color: #fff; /* fehér szöveg */
-    }
-
-    .night-mode .header {
+    .night-mode .header,
+    .night-mode .responsive-menu,
+    .night-mode .flip-card-front,
+    .night-mode .flip-card-back,
+    .night-mode .todo-list,
+    .night-mode .chatbot-container {
       background-color: #333;
-      color: white;
-    }
-
-    .night-mode .toast {
-      background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
-      color: #333;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-color: #fff;
     }
 
     .night-mode .menu a,
     .night-mode .dropdown-menu li a {
-      color: #fff; /* fehér szöveg */
-    }
-
-    .night-mode .flip-card-front,
-    .night-mode .flip-card-back {
-      background-color: #444; /* sötét háttér a kártyákhoz */
-    }
-
-    .night-mode .flip-card-back button {
-      background-color: #ffb6c1; /* rózsaszín gomb */
       color: #fff;
     }
 
-    .night-mode .chatbot-container {
-      background-color: #444; /* sötét háttér a chatbot-hoz */
+    .night-mode .menu a:hover,
+    .night-mode .dropdown-menu li a:hover {
+      color: #ffb6c1;
     }
 
+    .night-mode .flip-card-back button,
+    .night-mode .todo-form button,
     .night-mode .chatbot-container button {
-      background-color: #ffb6c1; /* rózsaszín gomb */
+      background-color: #ffb6c1;
       color: #fff;
+    }
+
+    .night-mode .flip-card-back button:hover,
+    .night-mode .todo-form button:hover,
+    .night-mode .chatbot-container button:hover {
+      background-color: #333;
     }
   </style>
 </head>
@@ -286,15 +335,19 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle">Szolgáltatások</a>
         <ul class="dropdown-menu">
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 1</a></li>
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 2</a></li>
-          <li><a href="https://sites.google.com/view">Google Sites Link 3</a></li>
-</ul>
-</li>
-<li><a href="#">Kapcsolat</a></li>
-</ul>
-
+          <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Főoldal</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/bemutatkoz%C3%A1s">Bemutatkozás</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Kapcsolat</a></li>
+    </ul>
   </div>
+
   <div class="kartyak">
     <div class="flip-card">
       <div class="flip-card-inner">
@@ -303,36 +356,36 @@
         </div>
         <div class="flip-card-back">
           <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" target="_blank">Google Sites Link</a></button>
         </div>
       </div>
     </div>
-php
-Kód másolása
-<div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
-    </div>
-    <div class="flip-card-back">
-      <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-      <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
-    </div>
-  </div>
-</div>
 
-<div class="flip-card">
-  <div class="flip-card-inner">
-    <div class="flip-card-front">
-      <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+        </div>
+        <div class="flip-card-back">
+          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/digikult" target="_blank">Google Sites Link</a></button>
+        </div>
+      </div>
     </div>
-    <div class="flip-card-back">
-      <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-      <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+        </div>
+        <div class="flip-card-back">
+          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+          <button><a href="https://sites.google.com/view/ita-tjm10b/projekt" target="_blank">Google Sites Link</a></button>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-  </div>
+
   <div class="chatbot-container">
     <h2>AI Chatbot - Üzenetek</h2>
     <div id="chat-container">
@@ -349,6 +402,18 @@ Kód másolása
       <button id="send-button">Küldés</button>
     </div>
   </div>
+
+  <div class="todo-list">
+    <h2>To Do Lista</h2>
+    <form class="todo-form" id="todo-form">
+      <input type="text" id="todo-input" class="todo-input" placeholder="Új feladat hozzáadása...">
+      <button type="submit" class="todo-button">Hozzáadás</button>
+    </form>
+    <div class="todo-container" id="todo-container">
+      <!-- To Do elemek ide -->
+    </div>
+  </div>
+
   <script>
     const nightModeToggle = document.querySelector('.night-mode-toggle');
     const body = document.body;
@@ -357,6 +422,9 @@ Kód másolása
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
+    const todoForm = document.getElementById('todo-form');
+    const todoInput = document.getElementById('todo-input');
+    const todoContainer = document.getElementById('todo-container');
 
     // Éjszakai mód kapcsoló kezelése
     nightModeToggle.addEventListener('click', () => {
@@ -389,6 +457,22 @@ Kód másolása
         botMessageElement.innerHTML = '<p>Elnézést, jelenleg nem értem. Kérem próbálja újra később.</p>';
       }, 1500);
     });
+
+    // To Do lista hozzáadása
+    todoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const todoText = todoInput.value.trim();
+      if (todoText === '') return;
+      const todoItem = document.createElement('div');
+      todoItem.classList.add('todo-item');
+      todoItem.innerHTML = `
+        <input type="checkbox" id="todo${todoContainer.children.length + 1}">
+        <label for="todo${todoContainer.children.length + 1}">${todoText}</label>
+      `;
+      todoContainer.appendChild(todoItem);
+      todoInput.value = '';
+    });
   </script>
 </body>
 </html>
+
