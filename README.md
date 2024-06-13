@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
     <link href="kartya.css" rel="stylesheet">
-    <style>/* Alap stílusok */
+    <style><style>
+        /* Alap stílusok */
 body {
     font-family: Arial, sans-serif;
     background-color: #ffc0cb; /* Rózsaszín háttérszín */
@@ -24,46 +25,22 @@ a:hover {
     text-decoration: underline;
 }
 
-/* Toast menü */
+/* Toast stílusok */
 .toast {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.9); /* Fehér háttér */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: none;
-    z-index: 999;
-    max-width: 300px;
-}
-
-.toast-content {
-    text-align: center;
-}
-
-.toast-icon {
-    font-size: 48px;
-    color: #ffc0cb; /* Rózsaszín ikon */
-}
-
-.toast-message {
-    font-size: 18px;
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffb6c1; /* Világosabb rózsaszín */
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    max-width: 300px; /* Kisebb méret */
 }
 
 .toast-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
     cursor: pointer;
-    color: #333;
-}
-
-.toast-close:hover {
-    color: #555;
 }
 
 /* Responsive menü */
@@ -116,21 +93,161 @@ a:hover {
     display: block;
 }
 
-/* Kártyák elrendezése */
-.cards-container {
+/* Chatbot és ToDo lista */
+.chatbot-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
     margin: 20px;
     flex-wrap: wrap;
 }
 
+.chatbot {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-right: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.chat-output {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.task-container {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-left: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.task-container h2 {
+    margin-bottom: 10px;
+}
+
+.task-container input[type="text"] {
+    width: calc(100% - 100px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.task-container button {
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Éjszakai mód */
+.night-mode {
+    background-color: #333;
+    color: white;
+}
+
+.toggle-night-mode {
+    margin: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.toggle-night-mode:hover {
+    background-color: #555;
+}
+
+/* Chatbot stílusok */
+.chat-messages {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-message {
+    background-color: #e0f7fa;
+    border-top-right-radius: 0;
+}
+
+.bot-message {
+    background-color: #f5f5f5;
+    border-top-left-radius: 0;
+}
+
+.message-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.user-message .message {
+    margin-left: auto;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.bot-message .message {
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Kártyák stílusai */
 .flip-card {
     background-color: transparent;
     width: 300px;
-    height: 200px;
-    margin: 10px;
+    height: 400px;
     perspective: 1000px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Megakadályozza a tartalom kiugrását */
 }
 
 .flip-card-inner {
@@ -140,8 +257,6 @@ a:hover {
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* Kerekített sarkok */
 }
 
 .flip-card:hover .flip-card-inner {
@@ -153,24 +268,17 @@ a:hover {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 10px;
 }
 
 .flip-card-front {
     background-color: #fff;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .flip-card-back {
-    background-color: #ffb6c1; /* Világosabb rózsaszín háttér */
+    background-color: #f5f5f5;
     color: #333;
     transform: rotateY(180deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .card-content {
@@ -178,13 +286,12 @@ a:hover {
 }
 
 .card-button {
-    padding: 10px;
+    display: inline-block;
+    padding: 10px 20px;
     background-color: #333;
     color: white;
     text-decoration: none;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
@@ -192,31 +299,57 @@ a:hover {
     background-color: #555;
 }
 
-/* Google Sites gomb */
-.google-sites-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Mobil nézet */
+@media screen and (max-width: 768px) {
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .menu li {
+        margin: 10px 0;
+    }
+
+    .menu a {
+        width: 100%;
+        text-align: left;
+    }
+
+    .dropdown-menu {
+        position: static;
+        width: auto;
+        margin-top: 5px;
+    }
+
+    .chatbot-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chatbot {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+        max-width: 100%;
+    }
+
+    .task-container {
+        width: 100%;
+        margin-left: 0;
+        max-width: 100%;
+    }
+
+    .flip-card {
+        width: 100%;
+        max-width: 300px;
+        height: 400px;
+        margin: 10px;
+    }
 }
 
-.google-sites-button:hover {
-    background-color: #555;
-}
-</style>
+</style></style>
 </head>
 <body>
-    <div class="student-info">
-        <p>Tóth Jázmin Mária</p>
-        <p>11.-es Gépészes Informatika szakos tanuló</p>
-    </div>
-
     <div class="responsive-menu">
         <ul class="menu">
             <li><a href="#főoldal">Főoldal</a></li>
@@ -233,6 +366,14 @@ a:hover {
                 </ul>
             </li>
         </ul>
+    </div>
+
+    <div class="toast-menu">
+        <button class="toggle-toast-menu">Toast menü megjelenítése</button>
+        <div class="toast">
+            <span class="toast-close">&times;</span>
+            <p>Ez egy toast üzenet.</p>
+        </div>
     </div>
 
     <div class="cards-container">
@@ -271,18 +412,6 @@ a:hover {
                 </div>
             </div>
         </div>
-    </div>
-
-    <button class="google-sites-button"><a href="https://sites.google.com/view/ita-tjm10b" target="_blank">Google Sites</a></button>
-
-    <div class="toast">
-        <div class="toast-content">
-            <i class="toast-icon fas fa-info-circle"></i>
-            <h1>Tóth Jázmin Mária vagyok</h1>
-            <p class="toast-message">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-            <p>11.-es vagyok</p>
-        </div>
-        <span class="toast-close">&times;</span>
     </div>
 
     <script src="kartya.js"></script>
