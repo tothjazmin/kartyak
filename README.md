@@ -98,11 +98,14 @@
         }
 
         .flip-card {
-            background-color: transparent;
+            background-color: #fff;
             width: 200px;
             height: 300px;
             perspective: 1000px;
             margin: 10px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .flip-card-inner {
@@ -124,11 +127,16 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .flip-card-back {
+            transform: rotateY(180deg);
         }
 
         @media only screen and (max-width: 768px) {
@@ -173,9 +181,13 @@
 
             function toggleNightMode() {
                 document.body.classList.toggle('night-mode');
-                toggleNightModeButton.textContent = document.body.classList.contains('night-mode')
-                    ? 'Éjszakai mód kikapcsolása'
-                    : 'Éjszakai mód bekapcsolása';
+                if (document.body.classList.contains('night-mode')) {
+                    toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
+                    document.querySelector('.toast').style.backgroundColor = '#444'; // Adjust toast background color for night mode
+                } else {
+                    toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
+                    document.querySelector('.toast').style.backgroundColor = '#333'; // Adjust toast background color back to default
+                }
             }
 
             // Show toast on page load
@@ -204,7 +216,7 @@
             <li><a href="#about">Rólam</a></li>
             <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
             <li class="dropdown-toggle">
-                <span>Bemutatkozás</span>
+                <span>Feladatlista</span>
                 <ul class="dropdown-menu">
                     <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
                     <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
@@ -213,6 +225,7 @@
                     <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
                 </ul>
             </li>
+            <li><button class="ai-chatbot-button">AI Chatbot</button></li>
         </ul>
     </div>
     <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
