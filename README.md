@@ -8,7 +8,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      background-color: pink;
       color: #333;
       margin: 0;
       padding: 0;
@@ -78,6 +78,7 @@
       background-color: #444;
       padding: 10px;
       border-radius: 5px;
+      position: absolute;
     }
     .menu li:hover .dropdown-menu {
       display: flex;
@@ -259,7 +260,6 @@
 
           messageContainer.appendChild(userMessage);
           messageContainer.appendChild(botMessage);
-          chatbotContainer.appendChild(messageContainer
           chatbotContainer.appendChild(messageContainer);
           chatbotContainer.scrollTop = chatbotContainer.scrollHeight;
         }
@@ -270,7 +270,7 @@
         const todoInput = document.querySelector('.todo-input');
         const todoText = todoInput.value.trim();
         if (todoText) {
-          const todoItem = document.createElement('div');
+          const todo           const todoItem = document.createElement('div');
           todoItem.classList.add('todo-item');
 
           const todoCheckbox = document.createElement('input');
@@ -308,9 +308,9 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle">Szolgáltatások</a>
         <ul class="dropdown-menu">
-          <li><a href="#">Webfejlesztés</a></li>
-          <li><a href="#">Grafikai tervezés</a></li>
-          <li><a href="#">SEO</a></li>
+          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 1</a></li>
+          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 2</a></li>
+          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 3</a></li>
         </ul>
       </li>
       <li><a href="#">Kapcsolat</a></li>
@@ -321,36 +321,42 @@
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <h2>Kártya 1</h2>
-          <p>Ez az első kártya.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
         <div class="flip-card-back">
-          <h2>Részletek</h2>
-          <p>Itt vannak a részletek az első kártyáról.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
       </div>
     </div>
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <h2>Kártya 2</h2>
-          <p>Ez a második kártya.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
         <div class="flip-card-back">
-          <h2>Részletek</h2>
-          <p>Itt vannak a részletek a második kártyáról.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
       </div>
     </div>
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <h2>Kártya 3</h2>
-          <p>Ez a harmadik kártya.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
         <div class="flip-card-back">
-          <h2>Részletek</h2>
-          <p>Itt vannak a részletek a harmadik kártyáról.</p>
+          <h2>Tóth Jázmin Mária</h2>
+          <p>Gépészes tanuló</p>
+          <p>11.-es</p>
         </div>
       </div>
     </div>
@@ -371,3 +377,4 @@
   </div>
 </body>
 </html>
+
