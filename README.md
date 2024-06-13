@@ -6,124 +6,161 @@
     <title>Weboldal</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="kartya.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <style>body {
-    font-family: Arial, sans-serif;
-    background-color: pink;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-JxxAgJNHMU2gupQrWQLQMXcEbvm0SbY5n97RCy1dP10Z6SR0q/LP3qh0VbAPiVRERkYi/2HoIjSYfyz6F4qfGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: pink;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
 
-.toggle-night-mode {
-    margin: 10px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #333;
-    cursor: pointer;
-    border-radius: 5px;
-}
+        .toggle-night-mode {
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #333;
+            cursor: pointer;
+            border-radius: 5px;
+        }
 
-.toast {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border-radius: 5px;
-}
+        .toast {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
 
-.toast-close {
-    cursor: pointer;
-}
+        .toast-close {
+            cursor: pointer;
+        }
 
-.responsive-menu {
-    background-color: #333;
-    padding: 10px;
-}
+        .responsive-menu {
+            background-color: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.menu {
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
+        .menu {
+            display: flex;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
 
-.menu-icon {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: white;
-    padding: 10px;
-}
+        .menu-icon {
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+            padding: 10px;
+        }
 
-.menu li {
-    margin: 10px;
-}
+        .menu li {
+            margin: 0 10px;
+        }
 
-.menu a {
-    color: white;
-    text-decoration: none;
-}
+        .menu a {
+            color: white;
+            text-decoration: none;
+        }
 
-.dropdown-toggle::after {
-    content: ' ▼';
-}
+        .dropdown-toggle::after {
+            content: ' ▼';
+        }
 
-.dropdown-menu {
-    display: none;
-    flex-direction: column;
-    background-color: #444;
-    padding: 10px;
-    border-radius: 5px;
-}
+        .dropdown-menu {
+            display: none;
+            flex-direction: column;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 5px;
+        }
 
-.menu li:hover .dropdown-menu {
-    display: flex;
-}
+        .menu li:hover .dropdown-menu {
+            display: flex;
+        }
 
-.kartyak {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 100px; /* Added margin to avoid overlap with menu */
-}
+        .kartyak {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 150px; /* Added margin to avoid overlap with menu */
+        }
 
-.flip-card {
-    background-color: transparent;
-    width: 200px;
-    height: 300px;
-    perspective: 1000px;
-    margin: 10px;
-}
+        .flip-card {
+            background-color: transparent;
+            width: 200px;
+            height: 300px;
+            perspective: 1000px;
+            margin: 10px;
+        }
 
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
 
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
 
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-</style>
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .menu {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .menu li {
+                margin: 10px 0;
+            }
+
+            .dropdown-toggle::after {
+                content: ' ►'; /* Change dropdown indicator for mobile */
+            }
+
+            .dropdown-menu {
+                position: static;
+                display: none;
+                width: 100%; /* Make dropdown full width on mobile */
+                margin-top: 10px;
+            }
+
+            .menu li:hover .dropdown-menu {
+                display: block;
+            }
+        }
+    </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const toggleNightModeButton = document.querySelector('.toggle-night-mode');
@@ -140,12 +177,13 @@
                     ? 'Éjszakai mód kikapcsolása'
                     : 'Éjszakai mód bekapcsolása';
             }
+
+            // Show toast on page load
+            document.querySelector('.toast').style.display = 'flex';
         });
     </script>
 </head>
 <body>
-
-<button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
 
 <div class="toast">
     <div class="toast-content">
@@ -158,23 +196,26 @@
 </div>
 
 <nav class="responsive-menu">
-    <input type="checkbox" id="menu-toggle">
-    <label for="menu-toggle" class="menu-icon">&#9776;</label>
-    <ul class="menu">
-        <li><a href="#home">Főoldal</a></li>
-        <li><a href="#about">Rólam</a></li>
-        <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
-        <li class="dropdown-toggle">
-            <span>Bemutatkozás</span>
-            <ul class="dropdown-menu">
-                <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
-                <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
-            </ul>
-        </li>
-    </ul>
+    <div>
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">&#9776;</label>
+        <ul class="menu">
+            <li><a href="#home">Főoldal</a></li>
+            <li><a href="#about">Rólam</a></li>
+            <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
+            <li class="dropdown-toggle">
+                <span>Bemutatkozás</span>
+                <ul class="dropdown-menu">
+                    <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
+                    <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
+                    <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
+                    <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
+                    <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
 </nav>
 
 <div class="kartyak">
@@ -230,3 +271,4 @@
 
 </body>
 </html>
+
