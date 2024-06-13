@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
-    <style>
-    body {
+   <style>
+       body {
     font-family: Arial, sans-serif;
     background-color: pink;
     color: #333;
@@ -38,6 +38,7 @@
 
 .responsive-menu {
     background-color: #333;
+    padding: 10px;
 }
 
 .menu {
@@ -239,30 +240,14 @@ button {
         align-items: center;
     }
 
-    .menu-icon {
-        display: block;
-    }
-
-    .menu input[type="checkbox"] {
-        display: none;
-    }
-
-    .menu input[type="checkbox"]:checked ~ .menu {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
     .dropdown-menu {
-        position: relative;
-        left: auto;
-        top: auto;
+        position: static;
         background-color: #444;
+        width: 100%;
     }
 }
 </style>
     <script>
-        // JavaScript kód itt
         const chatbotAnswers = {
             "Hogy hívnak?": "Tóth Jázmin Mária",
             "Hány éves vagy?": "17",
@@ -331,14 +316,13 @@ button {
     </div>
 
     <nav class="responsive-menu">
-        <input type="checkbox" id="menu-toggle">
-        <label for="menu-toggle" class="menu-icon">&#9776;</label>
         <ul class="menu">
             <li><a href="#home">Főoldal</a></li>
+            <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Rólam</a></li>
+            <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Google Sites Oldalam</a></li>
             <li>
                 <a href="#" class="dropdown-toggle">Linkek</a>
                 <ul class="dropdown-menu">
-                    <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Főoldal</a></li>
                     <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
                     <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
                     <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
