@@ -33,13 +33,6 @@
     background-color: #333;
     color: white;
     border-radius: 5px;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    max-width: 600px;
-    z-index: 1000;
 }
 
 .toast-close {
@@ -49,9 +42,6 @@
 .responsive-menu {
     background-color: #333;
     padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .menu {
@@ -89,8 +79,6 @@
     background-color: #444;
     padding: 10px;
     border-radius: 5px;
-    position: absolute;
-    width: 100%;
 }
 
 .menu li:hover .dropdown-menu {
@@ -136,153 +124,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.flip-card-front {
-    background-color: #fff;
-}
-
-.flip-card-back {
-    background-color: #eee;
-    transform: rotateY(180deg);
-}
-
-.card-img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px 15px 0 0;
-}
-
-.card-button {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.task-container {
-    margin: 20px;
-}
-
-#taskInput {
-    padding: 10px;
-    width: 80%;
-    border-radius: 5px;
-    border: 1px solid #333;
-}
-
-#taskList {
-    list-style-type: none;
-    padding: 0;
-}
-
-#taskList li {
-    padding: 10px;
-    margin: 5px 0;
-    background-color: #fff;
-    border: 1px solid #333;
-    border-radius: 5px;
-}
-
-.chatbot-container {
-    margin: 20px;
-    max-width: 600px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.chatbox {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-}
-
-.chat-output {
-    max-height: 200px;
-    overflow-y: auto;
-    margin-bottom: 10px;
-}
-
-.chat-message {
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    max-width: 80%;
-    word-wrap: break-word;
-}
-
-.user-message {
-    align-self: flex-end;
-    background-color: #dcf8c6;
-}
-
-.bot-message {
-    align-self: flex-start;
-    background-color: #fff;
-}
-
-#chatInput {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-button {
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .kartyak {
-        flex-direction: column;
-        align-items: center;
-        margin-top: 200px; /* More margin for smaller screens */
-    }
-
-    .menu {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-icon {
-        display: block;
-    }
-
-    .menu {
-        display: none;
-    }
-
-    .menu.active {
-        display: flex;
-    }
-
-    .dropdown-menu {
-        position: static;
-        background-color: #444;
-        width: 100%;
-    }
-}
-
-@media (max-width: 480px) {
-    .kartyak {
-        margin-top: 250px; /* More margin for smallest screens */
-    }
-
-    .chatbot-container {
-        margin-top: 20px; /* Ensure proper spacing */
-    }
-}
 </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
