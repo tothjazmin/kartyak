@@ -6,6 +6,7 @@
     <title>Weboldal</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="kartya.css">
+    <link rel="stylesheet" href="chatbot.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <style>
         body {
@@ -88,44 +89,10 @@
 .kartyak {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 100px; /* Added margin to avoid overlap with menu */
-}
-
-.flip-card {
-    background-color: transparent;
-    width: 200px;
-    height: 300px;
-    perspective: 1000px;
-    margin: 10px;
-}
-
-.flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center
 </style>
     <script>
+        
         document.addEventListener('DOMContentLoaded', () => {
             const toggleNightModeButton = document.querySelector('.toggle-night-mode');
             const closeButton = document.querySelector('.toast-close');
@@ -226,6 +193,21 @@
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="chatbot-container">
+    <div class="chatbox">
+        <div class="chat-header">
+            <h2>Mikre tudok válaszolni?</h2>
+        </div>
+        <div class="chat-output">
+            <div class="chat-message bot-message">
+                <p>Üdvözlöm! Miben segíthetek?</p>
+            </div>
+        </div>
+        <input type="text" id="chatInput" placeholder="Írjon üzenetet...">
+        <button id="sendButton">Küldés</button>
     </div>
 </div>
 
