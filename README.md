@@ -45,7 +45,7 @@
 
     .toast {
       position: absolute;
-      top: 60px; /* Adjusted position */
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
@@ -196,6 +196,57 @@
       background-color: #333; /* sötét rózsaszín */
     }
 
+    .todo-list {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .todo-list h2 {
+      margin-top: 0;
+    }
+
+    .todo-form {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    .todo-input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .todo-form button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .todo-form button:hover {
+      background-color: #333; /* sötét rózsaszín */
+    }
+
+    .todo-item {
+      margin-bottom: 10px;
+    }
+
+    .todo-item label {
+      margin-left: 10px;
+    }
+
     .chatbot-container {
       width: 100%;
       max-width: 600px;
@@ -251,7 +302,7 @@
           <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
           <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
           <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
-          <li><a href=" https://sites.google.com/view/ita-tjm10b/bemutatkoz%C3%A1s">Bemutatkozás</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/bemutatkoz%C3%A1s">Bemutatkozás</a></li>
         </ul>
       </li>
       <li><a href="#">Kapcsolat</a></li>
@@ -315,37 +366,46 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const nightModeToggle = document.querySelector('.night-mode-toggle');
-      const toastClose = document.querySelector('.toast-close');
-      const toast = document.querySelector('.toast');
-      const sendButton = document.querySelector('#send-button');
-      const userInput = document.querySelector('#user-input');
-      const chatContainer = document.querySelector('#chat-container');
+      const toggleNightModeButton = document.querySelector('.night-mode-toggle');
+      const toastCloseButton = document.querySelector('.toast-close');
+      const toastElement = document.querySelector('.toast');
 
-      nightModeToggle.addEventListener('click', toggleNightMode);
-      toastClose.addEventListener('click', () => {
-        toast.classList.remove('show');
+      toggleNightModeButton.addEventListener('click', () => {
+        document.body.classList.toggle('night-mode');
       });
 
-      function toggleNightMode() {
-        document.body.classList.toggle('night-mode');
-      }
+      toastCloseButton.addEventListener('click', () => {
+        toastElement.classList.remove('show');
+      });
+
+      const flipCards = document.querySelectorAll('.flip-card');
+      flipCards.forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+        });
+      });
+
+      const sendButton = document.getElementById('send-button');
+      const chatContainer = document.getElementById('chat-container');
+      const userInput = document.getElementById('user-input');
 
       sendButton.addEventListener('click', () => {
         const userMessage = userInput.value.trim();
         if (userMessage === '') return;
-
+        
         const userMessageElement = document.createElement('div');
         userMessageElement.classList.add('chat-message', 'user-message');
         userMessageElement.innerHTML = `<p>${userMessage}</p>`;
         chatContainer.appendChild(userMessageElement);
         userInput.value = '';
 
+        // Simulált válasz a chatbottól
         const botMessageElement = document.createElement('div');
         botMessageElement.classList.add('chat-message', 'bot-message');
         botMessageElement.innerHTML = '<p>Kérem várjon, válasz készítés alatt...</p>';
         chatContainer.appendChild(botMessageElement);
 
+        // Dummy válasz késleltetett megjelenítése
         setTimeout(() => {
           botMessageElement.innerHTML = '<p>Elnézést, jelenleg nem értem. Kérem próbálja újra később.</p>';
         }, 1500);
