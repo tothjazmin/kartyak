@@ -133,6 +133,7 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
+            color: #333; /* Text color on cards */
         }
 
         .flip-card-back {
@@ -173,6 +174,41 @@
         .todo-item input {
             margin-right: 10px;
         }
+
+        .chatbot-container {
+            background-color: #f1f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+
+        .message-container {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #e2f7cb;
+            color: #333;
+            padding: 8px;
+            border-radius: 5px;
+            margin-left: 10px;
+            margin-bottom: 5px;
+            max-width: 70%;
+        }
+
+        .bot-message {
+            background-color: #cbddf7;
+            color: #333;
+            padding: 8px;
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 5px;
+            max-width: 70%;
+            text-align: right;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -181,6 +217,7 @@
             const chatbotButton = document.querySelector('.ai-chatbot-button');
             const todoForm = document.querySelector('.todo-form');
             const todoList = document.querySelector('.todo-list-items');
+            const chatbotContainer = document.querySelector('.chatbot-container');
 
             toggleNightModeButton.addEventListener('click', toggleNightMode);
             closeButton.addEventListener('click', () => {
@@ -204,7 +241,7 @@
                     document.querySelector('.toast').style.backgroundColor = '#444'; // Toast alapértelmezett háttérszíne
                     document.querySelector('.responsive-menu').style.backgroundColor = '#444'; // Menü alapértelmezett háttérszíne
                     document.querySelectorAll('.flip-card').forEach(card => {
-                        card.style.backgroundColor = '#666'; // Kártyák alapértelmezett háttérszíne
+                        card.style.backgroundColor = '#fff'; // Kártyák alapértelmezett háttérszíne
                     });
                     document.querySelector('.todo-list').style.backgroundColor = '#333'; // To Do lista alapértelmezett háttérszíne
                 }
@@ -230,48 +267,51 @@
                             answer = '11.-es vagyok';
                             break;
                         case 'hol laksz?':
-                            answer = 'Porcsalmán';
-                            break;
-                        default:
-                            answer = 'Sajnálom, de erre a kérdésre nem tudok válaszolni.';
-                    }
-                    alert(answer);
-                }
-            }
+answer = 'Porcsalmán';
+break;
+default:
+answer = 'Sajnálom, de erre a kérdésre nem tudok válaszolni.';
+}
 
-            // To Do lista hozzáadása
-            todoForm.addEventListener('submit', addTodo);
+csharp
+Kód másolása
+              const userQuestion = `<div class="message-container"><div class="user-message">${question}</div></div>`;
+              const botAnswer = `<div class="message-container"><div class="bot-message">${answer}</div></div>`;
+              chatbotContainer.innerHTML += userQuestion + botAnswer;
+          }
+      }
 
-            function addTodo(event) {
-                event.preventDefault();
-                const todoItem = document.querySelector('.todo-input').value.trim();
+      // To Do lista hozzáadása
+      todoForm.addEventListener('submit', addTodo);
 
-                if (todoItem !== '') {
-                    const todoElement = document.createElement('div');
-                    todoElement.classList.add('todo-item');
-                    todoElement.innerHTML = `
-                        <input type="checkbox">
-                        <span>${todoItem}</span>
-                    `;
-                    todoList.appendChild(todoElement);
-                    document.querySelector('.todo-input').value = '';
-                }
-            }
-        });
-    </script>
+      function addTodo(event) {
+          event.preventDefault();
+          const todoItem = document.querySelector('.todo-input').value.trim();
+
+          if (todoItem !== '') {
+              const todoElement = document.createElement('div');
+              todoElement.classList.add('todo-item');
+              todoElement.innerHTML = `
+                  <input type="checkbox">
+                  <span>${todoItem}</span>
+              `;
+              todoList.appendChild(todoElement);
+              document.querySelector('.todo-input').value = '';
+          }
+      }
+  });
+  </script>
 </head>
 <body>
-
 <div class="toast">
     <div class="toast-content">
         <i class="toast-icon fas fa-info-circle"></i>
         <h1>Tóth Jázmin Mária vagyok</h1>
-        <p class="toast-message">Mátészalkán tanulok az Informatika szakon/p>
-                <p>11.-es vagyok</p>
+        <p class="toast-message">Mátészalkán tanulok az Informatika szakon</p>
+        <p>11.-es vagyok</p>
     </div>
     <span class="toast-close">&times;</span>
 </div>
-
 <nav class="responsive-menu">
     <div>
         <input type="checkbox" id="menu-toggle">
@@ -295,7 +335,6 @@
     </div>
     <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
 </nav>
-
 <div class="kartyak">
     <div class="flip-card">
         <div class="flip-card-inner">
@@ -346,7 +385,6 @@
         </div>
     </div>
 </div>
-
 <div class="todo-list">
     <h2>To Do lista</h2>
     <form class="todo-form">
@@ -355,7 +393,8 @@
     </form>
     <div class="todo-list-items"></div>
 </div>
-
+<div class="chatbot-container">
+    <!-- AI Chatbot Messenger-style conversation -->
+</div>
 </body>
 </html>
-
