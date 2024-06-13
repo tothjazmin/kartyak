@@ -133,7 +133,6 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-            color: #333; /* Text color on cards */
         }
 
         .flip-card-back {
@@ -145,11 +144,51 @@
             color: #fff;
         }
 
+        .chatbot-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+
+        .message-container {
+            margin-bottom: 10px;
+        }
+
+        .user-message {
+            background-color: #3b5998;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+            align-self: flex-start;
+            margin-right: auto;
+            margin-left: 10px;
+        }
+
+        .bot-message {
+            background-color: #00aced;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 70%;
+            align-self: flex-end;
+            margin-left: auto;
+            margin-right: 10px;
+        }
+
         .todo-list {
             background-color: #333;
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
+            color: #fff;
+            width: 300px; /* Adjusted width for better alignment */
+            margin-left: auto; /* Centered horizontally */
+            margin-right: auto;
         }
 
         .todo-form {
@@ -173,41 +212,6 @@
 
         .todo-item input {
             margin-right: 10px;
-        }
-
-        .chatbot-container {
-            background-color: #f1f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            max-height: 200px;
-            overflow-y: auto;
-            margin-top: 20px;
-        }
-
-        .message-container {
-            margin-bottom: 10px;
-        }
-
-        .user-message {
-            background-color: #e2f7cb;
-            color: #333;
-            padding: 8px;
-            border-radius: 5px;
-            margin-left: 10px;
-            margin-bottom: 5px;
-            max-width: 70%;
-        }
-
-        .bot-message {
-            background-color: #cbddf7;
-            color: #333;
-            padding: 8px;
-            border-radius: 5px;
-            margin-right: 10px;
-            margin-bottom: 5px;
-            max-width: 70%;
-            text-align: right;
         }
     </style>
     <script>
@@ -241,7 +245,7 @@
                     document.querySelector('.toast').style.backgroundColor = '#444'; // Toast alapértelmezett háttérszíne
                     document.querySelector('.responsive-menu').style.backgroundColor = '#444'; // Menü alapértelmezett háttérszíne
                     document.querySelectorAll('.flip-card').forEach(card => {
-                        card.style.backgroundColor = '#fff'; // Kártyák alapértelmezett háttérszíne
+                        card.style.backgroundColor = '#f9f9f9'; // Kártyák alapértelmezett háttérszíne
                     });
                     document.querySelector('.todo-list').style.backgroundColor = '#333'; // To Do lista alapértelmezett háttérszíne
                 }
@@ -261,54 +265,66 @@
                             answer = 'Tóth Jázmin Mária';
                             break;
                         case 'hova jársz iskolába?':
-                            answer = 'Mátészalka, Gépészeti';
-                            break;
-                        case 'hanyadikos vagy?':
-                            answer = '11.-es vagyok';
-                            break;
-                        case 'hol laksz?':
-answer = 'Porcsalmán';
+answer = 'Mátészalkán tanulok az Informatika szakon a Gépészetiben.';
+break;
+case 'hanyadikos vagy?':
+answer = '11.-es vagyok.';
+break;
+case 'hol laksz?':
+answer = 'Mátészalkán lakom.';
 break;
 default:
-answer = 'Sajnálom, de erre a kérdésre nem tudok válaszolni.';
+answer = 'Nem tudok válaszolni erre a kérdésre.';
 }
 
-csharp
+javascript
 Kód másolása
-              const userQuestion = `<div class="message-container"><div class="user-message">${question}</div></div>`;
-              const botAnswer = `<div class="message-container"><div class="bot-message">${answer}</div></div>`;
-              chatbotContainer.innerHTML += userQuestion + botAnswer;
-          }
-      }
+                const messageContainer = document.createElement('div');
+                messageContainer.classList.add('message-container');
 
-      // To Do lista hozzáadása
-      todoForm.addEventListener('submit', addTodo);
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('user-message');
+                userMessage.textContent = question;
 
-      function addTodo(event) {
-          event.preventDefault();
-          const todoItem = document.querySelector('.todo-input').value.trim();
+                const botMessage = document.createElement('div');
+                botMessage.classList.add('bot-message');
+                botMessage.textContent = answer;
 
-          if (todoItem !== '') {
-              const todoElement = document.createElement('div');
-              todoElement.classList.add('todo-item');
-              todoElement.innerHTML = `
-                  <input type="checkbox">
-                  <span>${todoItem}</span>
-              `;
-              todoList.appendChild(todoElement);
-              document.querySelector('.todo-input').value = '';
-          }
-      }
-  });
-  </script>
+                messageContainer.appendChild(userMessage);
+                messageContainer.appendChild(botMessage);
+
+                chatbotContainer.appendChild(messageContainer);
+            }
+        }
+
+        // To Do lista hozzáadása
+        todoForm.addEventListener('submit', addTodo);
+
+        function addTodo(event) {
+            event.preventDefault();
+            const todoItem = document.querySelector('.todo-input').value.trim();
+
+            if (todoItem !== '') {
+                const todoElement = document.createElement('div');
+                todoElement.classList.add('todo-item');
+                todoElement.innerHTML = `
+                    <input type="checkbox">
+                    <span>${todoItem}</span>
+                `;
+                todoList.appendChild(todoElement);
+                document.querySelector('.todo-input').value = '';
+            }
+        }
+    });
+</script>
 </head>
 <body>
 <div class="toast">
     <div class="toast-content">
         <i class="toast-icon fas fa-info-circle"></i>
         <h1>Tóth Jázmin Mária vagyok</h1>
-        <p class="toast-message">Mátészalkán tanulok az Informatika szakon</p>
-        <p>11.-es vagyok</p>
+        <p class="toast-message">Mátészalkán tanulok az Informatika szakon/p>
+                <p>11.-es vagyok</p>
     </div>
     <span class="toast-close">&times;</span>
 </div>
@@ -340,14 +356,14 @@ Kód másolása
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="namjoon.jpg" alt="Kim Namjoon" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <h3 style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
             <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <p style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p style="color: #333;">11.-es vagyok</p>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
         </div>
@@ -356,14 +372,14 @@ Kód másolása
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="jin.jpg" alt="Kim Seokjin" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <h3 style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
             <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <p style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p style="color: #333;">11.-es vagyok</p>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
         </div>
@@ -372,29 +388,41 @@ Kód másolása
         <div class="flip-card-inner">
             <div class="flip-card-front">
                 <img src="yoongi.jpg" alt="Min Yoongi" class="card-img">
-                <h1>Tóth Jázmin Mária</h1>
-                <h3>Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <h3 style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</h3>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
             <div class="flip-card-back">
-                <h1>Tóth Jázmin Mária</h1>
-                <p>Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
-                <p>11.-es vagyok</p>
+                <h1 style="color: #333;">Tóth Jázmin Mária</h1>
+                <p style="color: #333;">Mátészalkán tanulok az Informatika szakon a Gépészetiben</p>
+                <p style="color: #333;">11.-es vagyok</p>
                 <a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal" class="card-button">Google Sites Oldalam</a>
             </div>
         </div>
     </div>
 </div>
+<div class="chatbot-container">
+    <h2 style="text-align: center; margin-bottom: 10px;">AI Chatbot</h2>
+    <div class="message-container">
+        <div class="bot-message">
+            <p>Szia! Kérdezz tőlem bármit a következő témákban:</p>
+            <ul>
+                <li>- Hány éves vagy?</li>
+                <li>- Hogy hívnak?</li>
+                <li>- Hova jársz iskolába?</li>
+                <li>- Hanyadikos vagy?</li>
+                <li>- Hol laksz?</li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="todo-list">
-    <h2>To Do lista</h2>
+    <h2 style="text-align: center; color: #fff; margin-bottom: 10px;">To Do lista</h2>
     <form class="todo-form">
         <input type="text" class="todo-input" placeholder="Új feladat...">
         <button type="submit" class="todo-button">+</button>
     </form>
     <div class="todo-list-items"></div>
-</div>
-<div class="chatbot-container">
-    <!-- AI Chatbot Messenger-style conversation -->
 </div>
 </body>
 </html>
