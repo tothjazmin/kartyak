@@ -1,311 +1,295 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reszponzív Weboldal</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-JxxAgJNHMU2gupQrWQLQMXcEbvm0SbY5n97RCy1dP10Z6SR0q/LP3qh0VbAPiVRERkYi/2HoIjSYfyz6F4qfGg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8d7da;
-      color: #333;
+      background-color: #ffb6c1; /* rózsaszín háttér */
+      color: #333; /* alap szövegszín */
+      transition: background-color 0.3s ease;
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .night-mode {
+
+    .night-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      padding: 10px;
       background-color: #333;
-      color: #fff;
-    }
-    .header {
-      background-color: #ffb3ba;
       color: white;
-      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      width: 100%;
+      padding: 20px 0;
       text-align: center;
     }
-    .toggle-night-mode {
-      margin: 10px;
-      padding: 10px;
-      background-color: #fff;
-      border: 1px solid #333;
-      cursor: pointer;
-      border-radius: 5px;
+
+    .header h1 {
+      margin: 0;
+      font-size: 2em;
     }
+
     .toast {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      background-color: #ffb3ba;
-      color: white;
-      border-radius: 5px;
       position: absolute;
-      top: 20px;
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
+      background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       z-index: 1000;
+      display: none;
     }
+
+    .toast.show {
+      display: block;
+    }
+
     .toast-close {
+      float: right;
       cursor: pointer;
+      font-weight: bold;
     }
+
     .responsive-menu {
-      background-color: #ffb3ba;
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+      background-color: #fff;
       padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
     }
+
     .menu {
-      display: flex;
       list-style-type: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      justify-content: center;
     }
-    .menu-icon {
-      font-size: 30px;
-      cursor: pointer;
-      color: white;
-      padding: 10px;
-    }
+
     .menu li {
       margin: 0 10px;
     }
+
     .menu a {
-      color: white;
       text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
-    .dropdown-toggle::after {
-      content: ' ▼';
+
+    .menu a:hover {
+      color: #ffb6c1; /* rózsaszín hover */
     }
+
+    .menu .dropdown {
+      position: relative;
+    }
+
     .dropdown-menu {
-      display: none;
-      flex-direction: column;
-      background-color: #ffcccc;
-      padding: 10px;
-      border-radius: 5px;
       position: absolute;
-    }
-    .menu li:hover .dropdown-menu {
-      display: flex;
-    }
-    .kartyak {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 60px; /* Space for toast */
-    }
-    .flip-card {
+      top: 100%;
+      left: 0;
       background-color: #fff;
-      width: 300px;
-      height: 400px;
-      perspective: 1000px;
-      margin: 10px;
-      border-radius: 15px;
-      overflow: hidden;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      display: none;
     }
+
+    .dropdown-menu.show {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      padding: 10px;
+    }
+
+    .dropdown-menu li a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .dropdown-menu li a:hover {
+      color: #ffb6c1; /* rózsaszín hover */
+    }
+
+    .flip-card {
+      background-color: transparent;
+      width: 300px;
+      height: 200px;
+      margin: 20px;
+      perspective: 1000px;
+    }
+
     .flip-card-inner {
       position: relative;
       width: 100%;
       height: 100%;
       text-align: center;
-      transition: transform 0.8s;
+      transition: transform 0.6s;
       transform-style: preserve-3d;
+      border-radius: 10px;
     }
+
     .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
+
     .flip-card-front, .flip-card-back {
       position: absolute;
       width: 100%;
       height: 100%;
-      -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 20px;
-      box-sizing: border-box;
+      border-radius: 10px;
     }
+
+    .flip-card-front {
+      background-color: #fff;
+    }
+
     .flip-card-back {
+      background-color: #fff;
       transform: rotateY(180deg);
     }
-    .chatbot-container {
-      background-color: #ffb3ba;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      height: 400px;
-      overflow-y: auto;
-      border: 1px solid #555;
-      position: relative;
+
+    .flip-card-back p {
+      margin: 5px 0;
     }
-    .chatbot-container h2 {
+
+    .flip-card-back button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .flip-card-back button:hover {
+      background-color: #333; /* sötét rózsaszín */
+    }
+
+    .todo-list {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .todo-list h2 {
       margin-top: 0;
     }
-    .message-container {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 10px;
-    }
-    .user-message, .bot-message {
-      background-color: #00aced;
-      color: #fff;
-      padding: 10px;
-      border-radius: 15px;
-      max-width: 70%;
-      margin: 10px;
-    }
-    .user-message {
-      background-color: #3b5998;
-      align-self: flex-start;
-    }
-    .bot-message {
-      align-self: flex-end;
-    }
-    .todo-list {
-      background-color: #ffb3ba;
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      color: #fff;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-    }
+
     .todo-form {
       display: flex;
       margin-bottom: 10px;
     }
+
     .todo-input {
       flex: 1;
-      padding: 8px;
+      padding: 10px;
       font-size: 16px;
-      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
+
+    .todo-form button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .todo-form button:hover {
+      background-color: #333; /* sötét rózsaszín */
+    }
+
     .todo-item {
       margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      font-size: 16px;
     }
-    .todo-item input {
-      margin-right: 10px;
+
+    .todo-item label {
+      margin-left: 10px;
+    }
+
+    .chatbot-container {
+      width: 100%;
+      max-width: 600px;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .chatbot-container h2 {
+      margin-top: 0;
+    }
+
+    .chatbot-container button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .chatbot-container button:hover {
+      background-color: #333; /* sötét rózsaszín */
     }
   </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const toggleNightModeButton = document.querySelector('.toggle-night-mode');
-      const closeButton = document.querySelector('.toast-close');
-      const chatbotButton = document.querySelector('.ai-chatbot-button');
-      const todoForm = document.querySelector('.todo-form');
-      const todoList = document.querySelector('.todo-list-items');
-      const chatbotContainer = document.querySelector('.chatbot-container');
-
-      toggleNightModeButton.addEventListener('click', toggleNightMode);
-      closeButton.addEventListener('click', () => {
-        document.querySelector('.toast').style.display = 'none';
-      });
-      chatbotButton.addEventListener('click', openChatbot);
-      todoForm.addEventListener('submit', addTodo);
-
-      function toggleNightMode() {
-        document.body.classList.toggle('night-mode');
-        if (document.body.classList.contains('night-mode')) {
-          toggleNightModeButton.textContent = 'Nappali mód bekapcsolása';
-          document.querySelector('.toast').style.backgroundColor = '#777';
-          document.querySelector('.responsive-menu').style.backgroundColor = '#555';
-          document.querySelectorAll('.flip-card').forEach(card => {
-            card.style.backgroundColor = '#666';
-          });
-          document.querySelector('.todo-list').style.backgroundColor = '#555';
-          document.querySelector('.chatbot-container').style.backgroundColor = '#555';
-        } else {
-          toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
-          document.querySelector('.toast').style.backgroundColor = '#ffb3ba';
-          document.querySelector('.responsive-menu').style.backgroundColor = '#ffb3ba';
-          document.querySelectorAll('.flip-card').forEach(card => {
-            card.style.backgroundColor = '#fff';
-          });
-          document.querySelector('.todo-list').style.backgroundColor = '#ffb3ba';
-          document.querySelector('.chatbot-container').style.backgroundColor = '#ffb3ba';
-        }
-      }
-
-      function openChatbot() {
-        const question = prompt('Kérdezz tőlem bármit a következő témákban:\n\n- Hány éves vagy?\n- Hogy hívnak?\n- Hova jársz iskolába?\n- Hanyadikos vagy?\n- Hol laksz?');
-        if (question) {
-          let answer;
-          switch (question.toLowerCase()) {
-            case 'hány éves vagy?':
-              answer = '17';
-              break;
-            case 'hogy hívnak?':
-              answer = 'Tóth Jázmin Mária';
-              break;
-            case 'hova jársz iskolába?':
-              answer = 'Mátészalkára a Gépészetibe';
-              break;
-            case 'hanyadikos vagy?':
-              answer = '11.-es vagyok';
-              break;
-            case 'hol laksz?':
-              answer = 'Porcsalmán lakom';
-              break;
-            default:
-              answer = 'Nem tudok válaszolni erre a kérdésre.';
-          }
-          const messageContainer = document.createElement('div');
-          messageContainer.classList.add('message-container');
-
-          const userMessage = document.createElement('div');
-          userMessage.classList.add('user-message');
-          userMessage.textContent = question;
-
-          const botMessage = document.createElement('div');
-          botMessage.classList.add('bot-message');
-          botMessage.textContent = answer;
-
-          messageContainer.appendChild(userMessage);
-          messageContainer.appendChild(botMessage);
-          chatbotContainer.appendChild(messageContainer);
-          chatbotContainer.scrollTop = chatbotContainer.scrollHeight;
-        }
-      }
-
-      function addTodo(event) {
-        event.preventDefault();
-        const todoInput = document.querySelector('.todo-input');
-        const todoText = todoInput.value.trim();
-        if (todoText) {
-          const todoItem = document.createElement('div');
-          todoItem.classList.add('todo-item');
-
-          const todoCheckbox = document.createElement('input');
-          todoCheckbox.type = 'checkbox';
-
-          const todoLabel = document.createElement('label');
-          todoLabel.textContent = todoText;
-
-          todoItem.appendChild(todoCheckbox);
-          todoItem.appendChild(todoLabel);
-          todoList.appendChild(todoItem);
-
-          todoInput.value = '';
-        }
-      }
-    });
-  </script>
 </head>
 <body>
   <div class="header">
     <h1>Reszponzív Weboldal</h1>
-    <div class="toggle-night-mode">Éjszakai mód bekapcsolása</div>
+    <button class="night-mode-toggle">Éjszakai mód</button>
+  </div>
+
+  <div class="toast">
+    Tóth Jázmin Mária 11.-es tanuló
+    <span class="toast-close">&times;</span>
   </div>
 
   <div class="responsive-menu">
-    <div class="menu-icon"><i class="fas fa-bars"></i></div>
     <ul class="menu">
       <li><a href="#">Főoldal</a></li>
       <li><a href="#">Rólunk</a></li>
@@ -321,74 +305,102 @@
     </ul>
   </div>
 
-  <div class="toast">
-    Üdvözlünk a reszponzív weboldalon!
-    <span class="toast-close">&times;</span>
-  </div>
-
   <div class="kartyak">
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
+                     <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
         </div>
         <div class="flip-card-back">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
+          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
         </div>
       </div>
     </div>
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
-        </div>
-        <div class="flip-card-back">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
-        </div>
-      </div>
-    </div>
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
-        </div>
-        <div class="flip-card-back">
-          <h2>Tóth Jázmin Mária</h2>
-          <p>Gépészes tanuló</p>
-          <p>11.-es</p>
-          <button onclick="location.href='https://sites.google.com/view/czuczorokostanc/'">További információ</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="todo-list">
-    <h2>To-Do Lista</h2>
-    <form class="todo-form">
-      <input type="text" class="todo-input" placeholder="Új feladat hozzáadása">
-      <button type="submit">Hozzáad</button>
-    </form>
-    <div class="todo-list-items"></div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+        </div>
+        <div class="flip-card-back">
+          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+        </div>
+        <div class="flip-card-back">
+          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="chatbot-container">
-    <h2>AI Chatbot</h2>
-    <button class="ai-chatbot-button">Kérdezz tőlem!</button>
+    <h2>AI Chatbot - Üzenetek</h2>
+    <div id="chat-container">
+      <div class="chat-message user-message">
+        <p>Halló! Mi az aktuális idő?</p>
+      </div>
+      <div class="chat-message bot-message">
+        <p>Most 14:30 van.</p>
+      </div>
+      <!-- További chat üzenetek ide -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Írj üzenetet...">
+      <button id="send-button">Küldés</button>
+    </div>
   </div>
+
+  <script>
+    const nightModeToggle = document.querySelector('.night-mode-toggle');
+    const body = document.body;
+    const toast = document.querySelector('.toast');
+    const toastClose = document.querySelector('.toast .toast-close');
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+
+    // Éjszakai mód kapcsoló kezelése
+    nightModeToggle.addEventListener('click', () => {
+      body.classList.toggle('night-mode');
+    });
+
+    // Toast üzenet kezelése
+    toastClose.addEventListener('click', () => {
+      toast.classList.remove('show');
+    });
+
+    // Chatbot küldése gomb kezelése (dummy)
+    sendButton.addEventListener('click', () => {
+      const userMessage = userInput.value.trim();
+      if (userMessage === '') return;
+      const userMessageElement = document.createElement('div');
+      userMessageElement.classList.add('chat-message', 'user-message');
+      userMessageElement.innerHTML = `<p>${userMessage}</p>`;
+      chatContainer.appendChild(userMessageElement);
+      userInput.value = '';
+
+      // Dummy válasz a chatbottól
+      const botMessageElement = document.createElement('div');
+      botMessageElement.classList.add('chat-message', 'bot-message');
+      botMessageElement.innerHTML = '<p>Kérem várjon, válasz készítés alatt...</p>';
+      chatContainer.appendChild(botMessageElement);
+
+      // Dummy válasz késleltetett megjelenítése
+      setTimeout(() => {
+        botMessageElement.innerHTML = '<p>Elnézést, jelenleg nem értem. Kérem próbálja újra később.</p>';
+      }, 1500);
+    });
+  </script>
 </body>
 </html>
+
