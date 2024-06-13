@@ -368,26 +368,11 @@ a:hover {
         </ul>
     </div>
 
-    <div class="chatbot-container">
-        <div class="chatbot">
-            <div class="chat-messages" id="chat-messages">
-                <div class="bot-message">
-                    <div class="message-container">
-                        <div class="message">Kérdésekre válaszolok.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="user-input" placeholder="Írjon üzenetet...">
-                <button onclick="sendMessage()">Küldés</button>
-            </div>
-        </div>
-
-        <div class="task-container">
-            <h2>To Do lista</h2>
-            <input type="text" id="task-input" placeholder="Új feladat...">
-            <button onclick="addTask()">Hozzáad</button>
-            <ul id="task-list"></ul>
+    <div class="toast-menu">
+        <button class="toggle-toast-menu">Toast menü megjelenítése</button>
+        <div class="toast">
+            <span class="toast-close">&times;</span>
+            <p>Ez egy toast üzenet.</p>
         </div>
     </div>
 
