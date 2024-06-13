@@ -292,13 +292,17 @@
   <div class="responsive-menu">
     <ul class="menu">
       <li><a href="#">Főoldal</a></li>
-      <li><a href="#">Rólunk</a></li>
+      <li><a href="#">Rólam</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle">Szolgáltatások</a>
+        <a href="#" class="dropdown-toggle">Google Sites Linkek</a>
         <ul class="dropdown-menu">
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 1</a></li>
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 2</a></li>
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 3</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/f%C5%91oldal">Főoldal</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/digikult">Digikult</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/projekt">Projekt</a></li>
+           <li><a href="https://sites.google.com/view/ita-tjm10b/python">Python</a></li>
+          <li><a href="https://sites.google.com/view/ita-tjm10b/web">Web</a></li>
+           <li><a href="https://sites.google.com/view/ita-tjm10b/h%C3%A1l%C3%B3zat">Hálózat</a></li>
+          <li><a href=" https://sites.google.com/view/ita-tjm10b/bemutatkoz%C3%A1s">Bemutatkozás</a></li>
         </ul>
       </li>
       <li><a href="#">Kapcsolat</a></li>
