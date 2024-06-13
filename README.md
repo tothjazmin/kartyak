@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kártyák</title>
-  <style>
-      body {
+    <link href="kartya.css" rel="stylesheet">
+    <style>
+        body {
     font-family: Arial, sans-serif;
     background-color: pink;
     color: #333;
@@ -234,24 +235,22 @@ button {
     .kartyak {
         flex-direction: column;
         align-items: center;
-        margin-top: 200px; /* More margin for smaller screens */
-    }
-
-    .menu {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .menu-icon {
-        display: block;
+        margin-top: 150px; /* More margin for smaller screens */
     }
 
     .menu {
         display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
     }
 
     .menu.active {
         display: flex;
+    }
+
+    .menu-icon {
+        display: block;
     }
 
     .dropdown-menu {
@@ -263,7 +262,7 @@ button {
 
 @media (max-width: 480px) {
     .kartyak {
-        margin-top: 250px; /* More margin for smallest screens */
+        margin-top: 200px; /* More margin for smallest screens */
     }
 
     .chatbot-container {
@@ -406,5 +405,12 @@ button {
             <!-- ToDo feladatok jelennek meg itt -->
         </ul>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
