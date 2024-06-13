@@ -14,7 +14,20 @@ body {
 }
 
 .night-mode {
-  background-color: #333 !important;
+  background-color: #333;
+  color: #fff;
+}
+
+.night-mode .responsive-menu {
+  background-color: #555;
+}
+
+.night-mode .flip-card {
+  background-color: #666;
+}
+
+.night-mode .todo-list {
+  background-color: #444;
 }
 
 .responsive-menu {
@@ -100,6 +113,7 @@ body {
   width: 300px;
   height: 400px;
   perspective: 1000px;
+  transition: background-color 0.3s ease;
 }
 
 .flip-card-inner {
@@ -164,6 +178,7 @@ body {
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 .message-container {
@@ -202,6 +217,7 @@ body {
   width: 300px;
   margin-left: auto;
   margin-right: auto;
+  transition: background-color 0.3s ease;
 }
 
 .todo-form {
@@ -230,11 +246,9 @@ body {
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const toggleNightModeButton = document.querySelector('.toggle-night-mode');
-  const closeButton = document.querySelector('.toast-close');
   const chatbotButton = document.querySelector('.ai-chatbot-button');
   const todoForm = document.querySelector('.todo-form');
-  const todoList = document.querySelector('.todo-list-items');
-  const chatbotContainer = document.querySelector('.chatbot-container');
+  const todoList = document.querySelector('.todo-list');
 
   toggleNightModeButton.addEventListener('click', toggleNightMode);
 
@@ -242,20 +256,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('night-mode');
     if (document.body.classList.contains('night-mode')) {
       toggleNightModeButton.textContent = 'Éjszakai mód kikapcsolása';
-      document.querySelector('.toast').style.backgroundColor = '#555';
-      document.querySelector('.responsive-menu').style.backgroundColor = '#555';
-      document.querySelectorAll('.flip-card').forEach(card => {
-        card.style.backgroundColor = '#666';
-      });
-      document.querySelector('.todo-list').style.backgroundColor = '#444';
     } else {
       toggleNightModeButton.textContent = 'Éjszakai mód bekapcsolása';
-      document.querySelector('.toast').style.backgroundColor = '#444';
-      document.querySelector('.responsive-menu').style.backgroundColor = '#444';
-      document.querySelectorAll('.flip-card').forEach(card => {
-        card.style.backgroundColor = '#f9f9f9';
-      });
-      document.querySelector('.todo-list').style.backgroundColor = '#333';
     }
   }
 
@@ -302,7 +304,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function addTodo(event) {
     event.preventDefault();
-    const todoItem = document.querySelector('.todo-input').value.trim();
+    const todoInput = document.querySelector('.todo-input');
+    const todoItem = todoInput.value.trim();
     if (todoItem !== '') {
       const todoElement = document.createElement('div');
       todoElement.classList.add('todo-item');
@@ -311,10 +314,61 @@ document.addEventListener('DOMContentLoaded', () => {
         <span>${todoItem}</span>
       `;
       todoList.appendChild(todoElement);
-      document.querySelector('.todo-input').value = '';
+      todoInput.value = '';
     }
   }
 });
 </script>
 </head>
-<body
+<body>
+  <div class="responsive-menu">
+    <ul class="menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <button class="toggle-night-mode">Éjszakai mód bekapcsolása</button>
+  </div>
+
+  <div class="kartyak">
+    <div class="flip-card">
+            <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="your-image.jpg" alt="Image" class="card-img">
+          <h2>Card Front</h2>
+        </div>
+        <div class="flip-card-back">
+          <h2>Card Back</h2>
+          <a href="#" class="card-button">Button</a>
+        </div>
+      </div>
+    </div>
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="your-image.jpg" alt="Image" class="card-img">
+          <h2>Card Front</h2>
+        </div>
+        <div class="flip-card-back">
+          <h2>Card Back</h2>
+          <a href="#" class="card-button">Button</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chatbot-container">
+    <button class="ai-chatbot-button">Chatbot indítása</button>
+  </div>
+
+  <div class="todo-list">
+    <form class="todo-form">
+      <input type="text" class="todo-input" placeholder="Új feladat hozzáadása">
+      <button type="submit">Hozzáad</button>
+    </form>
+    <div class="todo-list-items"></div>
+  </div>
+</body>
+</html>
+
