@@ -44,8 +44,8 @@
     }
 
     .toast {
-      position: absolute;
-      top: 0;
+      position: fixed;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
@@ -196,57 +196,6 @@
       background-color: #333; /* sötét rózsaszín */
     }
 
-    .todo-list {
-      width: 100%;
-      max-width: 600px;
-      margin-top: 20px;
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
-
-    .todo-list h2 {
-      margin-top: 0;
-    }
-
-    .todo-form {
-      display: flex;
-      margin-bottom: 10px;
-    }
-
-    .todo-input {
-      flex: 1;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .todo-form button {
-      background-color: #ffb6c1; /* rózsaszín gomb */
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      text-decoration: none;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-
-    .todo-form button:hover {
-      background-color: #333; /* sötét rózsaszín */
-    }
-
-    .todo-item {
-      margin-bottom: 10px;
-    }
-
-    .todo-item label {
-      margin-left: 10px;
-    }
-
     .chatbot-container {
       width: 100%;
       max-width: 600px;
@@ -276,6 +225,47 @@
     .chatbot-container button:hover {
       background-color: #333; /* sötét rózsaszín */
     }
+
+    /* Éjszakai mód stílusai */
+    .night-mode {
+      background-color: #333; /* sötét háttér */
+      color: #fff; /* fehér szöveg */
+    }
+
+    .night-mode .header {
+      background-color: #333;
+      color: white;
+    }
+
+    .night-mode .toast {
+      background-color: rgba(255, 182, 193, 0.9); /* félig átlátszó rózsaszín */
+      color: #333;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .night-mode .menu a,
+    .night-mode .dropdown-menu li a {
+      color: #fff; /* fehér szöveg */
+    }
+
+    .night-mode .flip-card-front,
+    .night-mode .flip-card-back {
+      background-color: #444; /* sötét háttér a kártyákhoz */
+    }
+
+    .night-mode .flip-card-back button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+    }
+
+    .night-mode .chatbot-container {
+      background-color: #444; /* sötét háttér a chatbot-hoz */
+    }
+
+    .night-mode .chatbot-container button {
+      background-color: #ffb6c1; /* rózsaszín gomb */
+      color: #fff;
+    }
   </style>
 </head>
 <body>
@@ -298,29 +288,17 @@
         <ul class="dropdown-menu">
           <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 1</a></li>
           <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 2</a></li>
-          <li><a href="https://sites.google.com/view/czuczorokostanc/">Google Sites Link 3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Kapcsolat</a></li>
-    </ul>
-  </div>
+          <li><a href="https://sites.google.com/view">Google Sites Link 3</a></li>
+</ul>
+</li>
+<li><a href="#">Kapcsolat</a></li>
+</ul>
 
+  </div>
   <div class="kartyak">
     <div class="flip-card">
       <div class="flip-card-inner">
         <div class="flip-card-front">
-                     <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
-        </div>
-        <div class="flip-card-back">
-          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
-        </div>
-      </div>
-    </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
           <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
         </div>
         <div class="flip-card-back">
@@ -329,20 +307,32 @@
         </div>
       </div>
     </div>
-
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front">
-          <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
-        </div>
-        <div class="flip-card-back">
-          <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
-          <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
-        </div>
-      </div>
+php
+Kód másolása
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+    </div>
+    <div class="flip-card-back">
+      <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+      <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
     </div>
   </div>
+</div>
 
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div class="flip-card-front">
+      <h3>Tóth Jázmin Mária Gépészes tanuló 11. évfolyam</h3>
+    </div>
+    <div class="flip-card-back">
+      <p>Tóth Jázmin Mária Gépészes tanuló vagyok a 11. évfolyamból.</p>
+      <button><a href="https://sites.google.com/view/czuczorokostanc/" target="_blank">Google Sites Link</a></button>
+    </div>
+  </div>
+</div>
+  </div>
   <div class="chatbot-container">
     <h2>AI Chatbot - Üzenetek</h2>
     <div id="chat-container">
@@ -359,7 +349,6 @@
       <button id="send-button">Küldés</button>
     </div>
   </div>
-
   <script>
     const nightModeToggle = document.querySelector('.night-mode-toggle');
     const body = document.body;
@@ -403,4 +392,3 @@
   </script>
 </body>
 </html>
-
