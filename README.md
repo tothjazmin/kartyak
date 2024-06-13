@@ -5,7 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kártyák</title>
   <link href="kartya.css" rel="stylesheet">
-    
+    <style>
+        body {
+  font-family: Arial, sans-serif;
+  background-color: pink;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.toggle-night-mode {
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #333;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+}
+
+.toast-close {
+  cursor: pointer;
+}
+
+.responsive-menu {
+  background-color: #333;
+  padding: 10px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+}
+
+.menu li {
+  margin: 10px;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+}
+
+.dropdown-toggle::after {
+  content: ' ▼';
+}
+
+.dropdown-menu {
+  display: none;
+  flex-direction: column;
+  background-color: #444;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu li:hover .dropdown-menu {
+  display: flex;
+}
+
+.kartyak {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 100px; /* Added margin to avoid overlap with menu */
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+  margin: 10px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.flip-card-front {
+  background-color: #fff;
+}
+
+.flip-card-back {
+  background-color: #eee;
+  transform: rotateY(180deg);
+}
+
+.card-img {
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 0 0;
+}
+
+.card-button {
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.task-container {
+  margin: 20px;
+}
+
+#taskInput {
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #333;
+}
+
+#taskList {
+  list-style-type: none;
+  
+</style>
   <script>
     const chatbotAnswers = {
       "Hogy hívnak?": "Tóth Jázmin Mária",
